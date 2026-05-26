@@ -52,19 +52,7 @@ export default function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200"
-                  style={{
-                    backgroundColor: 'rgba(255,255,255,0.1)',
-                    color: 'rgba(255,255,255,0.75)',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-gold)';
-                    (e.currentTarget as HTMLAnchorElement).style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(255,255,255,0.1)';
-                    (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.75)';
-                  }}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 bg-white/10 text-white/75 hover:bg-[#c8a84b] hover:text-white"
                 >
                   <Icon size={16} />
                 </a>
@@ -85,14 +73,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: 'rgba(255,255,255,0.75)' }}
-                    onMouseEnter={(e) =>
-                      ((e.target as HTMLAnchorElement).style.color = 'var(--color-gold)')
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.target as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.75)')
-                    }
+                    className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
                   >
                     {link.label}
                   </Link>
@@ -192,17 +173,15 @@ export default function Footer() {
               <li>
                 <Link
                   href="/mentions-legales"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'rgba(255,255,255,0.75)' }}
+                  className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
                 >
                   Mentions légales
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/politique-de-confidentialite"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'rgba(255,255,255,0.75)' }}
+                  href="/politique-confidentialite"
+                  className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
                 >
                   Politique de confidentialité
                 </Link>

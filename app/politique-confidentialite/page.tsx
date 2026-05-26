@@ -5,7 +5,7 @@ import AnimatedSection from '@/components/AnimatedSection'
 export const metadata: Metadata = {
   title: 'Politique de Confidentialité',
   description:
-    'Politique de confidentialité et de protection des données personnelles de TRANS'HORSES SAS.',
+    "Politique de confidentialité et de protection des données personnelles de TRANS'HORSES SAS.",
 }
 
 export default function PolitiqueConfidentialite() {

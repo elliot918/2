@@ -4,7 +4,7 @@ import AnimatedSection from '@/components/AnimatedSection'
 
 export const metadata: Metadata = {
   title: 'Mentions Légales',
-  description: 'Mentions légales de TRANS'HORSES SAS — SIREN 448 516 617.',
+  description: "Mentions légales de TRANS'HORSES SAS — SIREN 448 516 617.",
 }
 
 export default function MentionsLegales() {
