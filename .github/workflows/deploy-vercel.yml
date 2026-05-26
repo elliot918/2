@@ -1,18 +1,29 @@
-name: 🏁 Deploy to Vercel (Production)
+name: 🚀 Deploy to Vercel (Production)
 
+# Déclenché manuellement UNIQUEMENT — valide d'abord les screenshots Playwright,
+# puis lance ce workflow depuis l'onglet Actions de GitHub.
 on:
-  push:
-    branches:
-      - main  # uniquement sur main = version finale validée
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch ou SHA à déployer (défaut : main)'
+        required: false
+        default: 'main'
 
 jobs:
   deploy-vercel:
     runs-on: ubuntu-latest
     name: Vercel Production Deploy
+    # 🔒 Ce job attend une approbation manuelle dans l'environnement "production".
+    # Configure-le dans :
+    # GitHub → Settings → Environments → production → Required reviewers → ton pseudo
+    environment: production
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || 'main' }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,6 +51,8 @@ jobs:
 
       - name: ✅ Summary
         run: |
-          echo "## 🏁 Déploiement Vercel Production" >> $GITHUB_STEP_SUMMARY
+          echo "## 🚀 Déploiement Vercel Production" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ **URL de production :** ${{ steps.vercel-deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Ref déployé : \`${{ inputs.ref || 'main' }}\`" >> $GITHUB_STEP_SUMMARY
