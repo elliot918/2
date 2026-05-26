@@ -6,7 +6,7 @@ import QuoteForm from '@/components/QuoteForm'
 export const metadata: Metadata = {
   title: 'Services & Devis',
   description:
-    'Demandez votre devis personnalisé pour transport de chevaux ou location de véhicules. Réponse rapide de l'équipe TRANS'HORSES.',
+    "Demandez votre devis personnalisé pour transport de chevaux ou location de véhicules. Réponse rapide de l'équipe TRANS'HORSES.",
 }
 
 const engagements = [

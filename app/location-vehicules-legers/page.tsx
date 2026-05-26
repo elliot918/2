@@ -6,7 +6,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Location de Véhicules Légers',
   description:
-    'Location de véhicules légers spécialisés pour le transport d'équidés — van, camionnette, remorque — avec ou sans chauffeur.',
+    "Location de véhicules légers spécialisés pour le transport d'équidés — van, camionnette, remorque — avec ou sans chauffeur.",
 }
 
 const vehicles = [

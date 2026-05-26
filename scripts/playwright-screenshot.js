@@ -19,6 +19,14 @@ const VIEWPORTS = [
 
 const ROUTES = [
   { path: "/", name: "home" },
+  { path: "/transport-chevaux", name: "transport-chevaux" },
+  { path: "/aerien-maritime", name: "aerien-maritime" },
+  { path: "/location-poids-lourds", name: "location-poids-lourds" },
+  { path: "/location-vehicules-legers", name: "location-vehicules-legers" },
+  { path: "/services-devis", name: "services-devis" },
+  { path: "/contact", name: "contact" },
+  { path: "/mentions-legales", name: "mentions-legales" },
+  { path: "/politique-confidentialite", name: "politique-confidentialite" },
 ];
 
 async function main() {
