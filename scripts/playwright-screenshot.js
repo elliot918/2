@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Playwright screenshot script — captures the app at multiple viewports.
+ * Playwright screenshot script — Les Barrys
  * Usage: node scripts/playwright-screenshot.js [base-url]
  * Default base-url: http://localhost:3000
  */
@@ -13,20 +13,20 @@ const BASE_URL = process.argv[2] || "http://localhost:3000";
 const OUT_DIR = path.resolve(__dirname, "../screenshots");
 
 const VIEWPORTS = [
-  { name: "desktop", width: 1280, height: 800 },
+  { name: "desktop", width: 1440, height: 900 },
   { name: "mobile",  width: 390,  height: 844 },
 ];
 
 const ROUTES = [
-  { path: "/", name: "home" },
-  { path: "/transport-chevaux", name: "transport-chevaux" },
-  { path: "/aerien-maritime", name: "aerien-maritime" },
-  { path: "/location-poids-lourds", name: "location-poids-lourds" },
-  { path: "/location-vehicules-legers", name: "location-vehicules-legers" },
-  { path: "/services-devis", name: "services-devis" },
-  { path: "/contact", name: "contact" },
-  { path: "/mentions-legales", name: "mentions-legales" },
-  { path: "/politique-confidentialite", name: "politique-confidentialite" },
+  { path: "/",                        name: "accueil" },
+  { path: "/vente",                   name: "vente" },
+  { path: "/locations-saisonnieres",  name: "locations" },
+  { path: "/bien/california",         name: "bien-california" },
+  { path: "/bien/villa-solea",        name: "bien-villa-solea" },
+  { path: "/notre-agence",            name: "notre-agence" },
+  { path: "/equipe",                  name: "equipe" },
+  { path: "/estimation",              name: "estimation" },
+  { path: "/contact",                 name: "contact" },
 ];
 
 async function main() {
@@ -42,12 +42,26 @@ async function main() {
     });
     const page = await context.newPage();
 
+    // Disable animations for cleaner screenshots
+    await page.addInitScript(() => {
+      document.documentElement.style.setProperty('--animation-duration', '0s');
+    });
+
     for (const route of ROUTES) {
-      await page.goto(`${BASE_URL}${route.path}`, { waitUntil: "networkidle" });
-      const file = path.join(OUT_DIR, `${route.name}-${vp.name}.png`);
-      await page.screenshot({ path: file, fullPage: true });
-      shots.push(file);
-      console.log(`✅  ${file}`);
+      try {
+        await page.goto(`${BASE_URL}${route.path}`, {
+          waitUntil: "networkidle",
+          timeout: 30000,
+        });
+        // Extra wait for GSAP/fonts to settle
+        await page.waitForTimeout(1500);
+        const file = path.join(OUT_DIR, `${route.name}-${vp.name}.png`);
+        await page.screenshot({ path: file, fullPage: true });
+        shots.push(file);
+        console.log(`✅  ${file}`);
+      } catch (err) {
+        console.error(`❌  ${route.path}: ${err.message}`);
+      }
     }
 
     await context.close();
