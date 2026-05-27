@@ -78,21 +78,21 @@ export default function HomePage() {
               title="Transport Routier"
               description="Liaisons hebdomadaires, groupage, trajets individuels. France et étranger."
               href="/transport-chevaux"
-              imageUrl="https://images.unsplash.com/photo-1586023492125-27b2c5c2bb4a?auto=format&fit=crop&w=1920&q=80"
+              imageUrl="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80"
             />
             <ServiceCard
               icon={<Plane className="h-6 w-6" />}
               title="Aérien & Maritime"
               description="Transport international de chevaux par avion ou bateau, avec toutes les formalités."
               href="/aerien-maritime"
-              imageUrl="https://images.unsplash.com/photo-1436891620584-47fd0e3e04a1?auto=format&fit=crop&w=1920&q=80"
+              imageUrl="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80"
             />
             <ServiceCard
               icon={<Car className="h-6 w-6" />}
               title="Location PL & VL"
               description="Location de poids lourds et véhicules légers, avec ou sans chauffeur."
               href="/location-poids-lourds"
-              imageUrl="https://images.unsplash.com/photo-1601584672516-ee65f5e4a4b9?auto=format&fit=crop&w=1920&q=80"
+              imageUrl="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80"
             />
           </div>
         </AnimatedSection>
