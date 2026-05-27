@@ -78,7 +78,7 @@ export default function HomePage() {
               title="Transport Routier"
               description="Liaisons hebdomadaires, groupage, trajets individuels. France et étranger."
               href="/transport-chevaux"
-              imageUrl="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80"
+              imageUrl="https://images.unsplash.com/photo-1535440724399-15ca4f772090?auto=format&fit=crop&w=800&q=80"
             />
             <ServiceCard
               icon={<Plane className="h-6 w-6" />}
@@ -92,7 +92,7 @@ export default function HomePage() {
               title="Location PL & VL"
               description="Location de poids lourds et véhicules légers, avec ou sans chauffeur."
               href="/location-poids-lourds"
-              imageUrl="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80"
+              imageUrl="https://images.unsplash.com/photo-1499147463149-adc471bbc639?auto=format&fit=crop&w=800&q=80"
             />
           </div>
         </AnimatedSection>
