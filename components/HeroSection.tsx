@@ -77,7 +77,7 @@ export default function HeroSection({
       </div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/65" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
@@ -93,7 +93,7 @@ export default function HeroSection({
         <h1
           ref={titleRef}
           className="mb-4 text-4xl font-bold md:text-6xl lg:text-7xl"
-          style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
+          style={{ fontFamily: 'Playfair Display, Georgia, serif', color: '#FFFFFF' }}
         >
           {title}
         </h1>
@@ -101,7 +101,8 @@ export default function HeroSection({
         {subtitle && (
           <p
             ref={subtitleRef}
-            className="mb-8 max-w-2xl text-lg text-white/80 md:text-xl"
+            className="mb-8 max-w-2xl text-lg md:text-xl"
+            style={{ color: '#FFFFFF' }}
           >
             {subtitle}
           </p>
