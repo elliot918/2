@@ -171,16 +171,16 @@ export default async function BienPage({ params }: PageProps) {
                 style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
               >
                 <a
-                  href="tel:+33494561234"
+                  href="tel:+33494564485"
                   className="block hover:text-[#B9965A] transition-colors mb-1"
                 >
-                  +33 (0)4 94 56 12 34
+                  +33 (0)4 94 56 44 85
                 </a>
                 <a
-                  href="mailto:contact@lesbarrys.fr"
+                  href="mailto:barrys@lesbarrys.com"
                   className="block hover:text-[#B9965A] transition-colors"
                 >
-                  contact@lesbarrys.fr
+                  barrys@lesbarrys.com
                 </a>
               </p>
             </div>
