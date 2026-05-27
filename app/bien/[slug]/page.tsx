@@ -1,16 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import {
-  getPropertyBySlug,
-  allProperties,
-  venteProperties,
-  locationProperties,
-} from '@/lib/properties'
-import PropertyCard from '@/components/PropertyCard'
-import HeroParallax from './HeroParallax'
-import PriceCounter from '@/components/PriceCounter'
+import { getPropertyBySlug, allProperties } from '@/lib/properties'
+import BienContactForm from './BienContactForm'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -33,205 +25,117 @@ export default async function BienPage({ params }: PageProps) {
   const { slug } = await params
   const property = getPropertyBySlug(slug)
 
-  if (!property) {
-    notFound()
-  }
+  if (!property) notFound()
 
-  // Related properties: same type, exclude current
-  const pool = property.type === 'vente' ? venteProperties : locationProperties
-  const related = pool.filter((p) => p.slug !== property.slug).slice(0, 2)
-
-  const stats = [
-    { label: 'Surface', value: `${property.surface} m²` },
-    { label: 'Pièces', value: `${property.rooms}` },
-    ...(property.bedrooms ? [{ label: 'Chambres', value: `${property.bedrooms}` }] : []),
-    ...(property.land
-      ? [{ label: 'Terrain', value: `${property.land.toLocaleString('fr-FR')} m²` }]
-      : []),
-  ]
+  // Specs line — only include defined values
+  const specs = [
+    `${property.surface} m²`,
+    `${property.rooms} pièces`,
+    property.bedrooms ? `${property.bedrooms} chambres` : null,
+    property.land ? `terrain ${property.land.toLocaleString('fr-FR')} m²` : null,
+  ].filter(Boolean) as string[]
 
   return (
     <>
-      {/* ── 1. Hero image — full screen, clean ── */}
-      <HeroParallax imageUrl={property.imageUrl} name={property.name} />
+      {/* ── 1. Hero photo — full width, 500 px ── */}
+      <div style={{ width: '100%', height: '500px', position: 'relative', overflow: 'hidden' }}>
+        <Image
+          src={property.imageUrl}
+          alt={property.name}
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          priority
+          sizes="100vw"
+        />
+      </div>
 
-      {/* ── 2. Property heading ── */}
-      <section className="bg-[#F7F3EE] pt-14 pb-0 px-6">
-        <div className="max-w-[1440px] mx-auto">
-          <p
-            style={{
-              fontFamily: 'var(--font-manrope), sans-serif',
-              fontSize: '0.6rem',
-              letterSpacing: '0.35em',
-              textTransform: 'uppercase',
-              color: '#B9965A',
-              marginBottom: '0.75rem',
-            }}
-          >
+      {/* ── 2. Content — ivory background ── */}
+      <div style={{ backgroundColor: '#F7F3EE', padding: '3rem 1.5rem 5rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+
+          {/* Location eyebrow */}
+          <p style={{
+            fontFamily: 'var(--font-manrope), sans-serif',
+            fontSize: '0.6rem',
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            color: '#B9965A',
+            marginBottom: '0.75rem',
+          }}>
             {property.location} · {property.type === 'vente' ? 'À vendre' : 'Location saisonnière'}
           </p>
-          <h1
-            style={{
+
+          {/* Name + Price row */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <h1 style={{
               fontFamily: 'var(--font-cormorant), Georgia, serif',
               fontStyle: 'italic',
-              fontSize: 'clamp(2.5rem, 6vw, 5rem)',
               fontWeight: 300,
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
               color: '#1F1D1A',
-              lineHeight: 1.05,
-            }}
-          >
-            {property.name}
-          </h1>
-        </div>
-      </section>
-
-      {/* ── 3. Details ── */}
-      <section className="bg-[#F7F3EE] py-16 px-6">
-        <div className="max-w-[1440px] mx-auto grid lg:grid-cols-3 gap-16">
-          {/* Left — 2/3 */}
-          <div className="lg:col-span-2">
-            <h2
-              className="text-xl font-light italic text-[#6F7358] mb-8"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              La propriété
-            </h2>
-
-            <p
-              className="text-sm md:text-base text-[#6F7358] leading-relaxed max-w-2xl"
-              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-            >
-              {property.description}
+              lineHeight: 1,
+              margin: 0,
+            }}>
+              {property.name}
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-cormorant), Georgia, serif',
+              fontWeight: 300,
+              fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
+              color: '#B9965A',
+              margin: 0,
+              whiteSpace: 'nowrap',
+            }}>
+              {property.priceDisplay}
             </p>
-
-            {/* Features grid */}
-            <div className="grid grid-cols-2 gap-3 mt-10">
-              {property.features.map((f) => (
-                <p
-                  key={f}
-                  className="text-sm text-[#1F1D1A] flex items-start gap-2"
-                  style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-                >
-                  <span className="text-[#B9965A] mt-0.5">·</span>
-                  {f}
-                </p>
-              ))}
-            </div>
-
-            {/* Image gallery */}
-            {property.images.length > 0 && (
-              <div className="grid grid-cols-3 gap-3 mt-12">
-                {property.images.map((src, i) => (
-                  <div key={i} className="relative h-40 overflow-hidden">
-                    <Image
-                      src={src}
-                      alt={`${property.name} — vue ${i + 1}`}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 768px) 33vw, 25vw"
-                      className="hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
-          {/* Right sidebar — 1/3 */}
-          <div className="lg:sticky lg:top-8 self-start">
-            {/* Price — counts up from 0 when scrolled into view */}
-            <PriceCounter
-              price={property.price}
-              priceDisplay={property.priceDisplay}
-              className="text-3xl md:text-4xl font-light text-[#B9965A] mb-8"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            />
+          {/* Divider */}
+          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '1.5rem 0' }} />
 
-            {/* Key stats */}
-            <div className="border-t border-[#D8C3A5]">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="flex justify-between items-center py-3 border-b border-[#D8C3A5]"
-                >
-                  <span
-                    className="text-xs uppercase tracking-widest text-[#6F7358]"
-                    style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-                  >
-                    {s.label}
-                  </span>
-                  <span
-                    className="text-sm text-[#1F1D1A] font-light"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    {s.value}
-                  </span>
-                </div>
-              ))}
-            </div>
+          {/* Specs — one line */}
+          <p style={{
+            fontFamily: 'var(--font-manrope), sans-serif',
+            fontSize: '0.75rem',
+            letterSpacing: '0.15em',
+            color: '#6F7358',
+            textTransform: 'uppercase',
+          }}>
+            {specs.join(' · ')}
+          </p>
 
-            {/* CTAs */}
-            <div className="mt-8 flex flex-col gap-3">
-              <Link href="/contact" className="btn-primary text-center">
-                Nous contacter pour ce bien
-              </Link>
-              <Link
-                href="/estimation"
-                className="text-xs tracking-widest uppercase text-[#6F7358] hover:text-[#B9965A] transition-colors text-center py-2"
-                style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-              >
-                Estimation de votre bien →
-              </Link>
-            </div>
+          {/* Divider */}
+          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '1.5rem 0' }} />
 
-            {/* Contact block */}
-            <div className="mt-8 pt-8 border-t border-[#D8C3A5]">
-              <p
-                className="text-[10px] tracking-[0.3em] uppercase text-[#B9965A] mb-3"
-                style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-              >
-                Contact
-              </p>
-              <p
-                className="text-sm text-[#1F1D1A]"
-                style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
-              >
-                <a
-                  href="tel:+33494564485"
-                  className="block hover:text-[#B9965A] transition-colors mb-1"
-                >
-                  +33 (0)4 94 56 44 85
-                </a>
-                <a
-                  href="mailto:barrys@lesbarrys.com"
-                  className="block hover:text-[#B9965A] transition-colors"
-                >
-                  barrys@lesbarrys.com
-                </a>
-              </p>
-            </div>
-          </div>
+          {/* Description */}
+          <p style={{
+            fontFamily: 'var(--font-manrope), sans-serif',
+            fontSize: '0.9375rem',
+            lineHeight: 1.8,
+            color: '#3a3835',
+            maxWidth: '72ch',
+          }}>
+            {property.description}
+          </p>
+
+          {/* Divider */}
+          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '3rem 0 2rem' }} />
+
+          {/* Contact form */}
+          <p style={{
+            fontFamily: 'var(--font-manrope), sans-serif',
+            fontSize: '0.6rem',
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            color: '#B9965A',
+            marginBottom: '1.75rem',
+          }}>
+            Nous contacter pour ce bien
+          </p>
+          <BienContactForm propertyName={property.name} />
+
         </div>
-      </section>
-
-      {/* ── 3. Autres biens ── */}
-      {related.length > 0 && (
-        <section className="bg-[#1F1D1A] py-24 px-6">
-          <div className="max-w-[1440px] mx-auto">
-            <h2
-              className="text-4xl font-light italic text-white mb-12"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Autres biens
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {related.map((p, i) => (
-                <PropertyCard key={p.slug} {...p} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      </div>
     </>
   )
 }
