@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 const navLinks = [
@@ -9,6 +11,12 @@ const navLinks = [
   { label: 'Estimation', href: '/estimation' },
   { label: 'Contact', href: '/contact' },
 ]
+
+const footerLinkStyle = {
+  fontFamily: 'var(--font-manrope), sans-serif',
+  fontSize: '0.8125rem',
+  textDecoration: 'none',
+}
 
 export default function Footer() {
   return (
@@ -65,15 +73,8 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    style={{
-                      fontFamily: 'var(--font-manrope), sans-serif',
-                      fontSize: '0.8125rem',
-                      color: '#D8C3A5',
-                      transition: 'color 0.3s ease',
-                      textDecoration: 'none',
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
+                    className="text-[#D8C3A5] hover:text-[#B9965A] transition-colors duration-300"
+                    style={footerLinkStyle}
                   >
                     {link.label}
                   </Link>
@@ -169,29 +170,15 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               <a
                 href="tel:+33494564485"
-                style={{
-                  fontFamily: 'var(--font-manrope), sans-serif',
-                  fontSize: '0.8125rem',
-                  color: '#D8C3A5',
-                  transition: 'color 0.3s ease',
-                  textDecoration: 'none',
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
+                className="text-[#D8C3A5] hover:text-[#B9965A] transition-colors duration-300"
+                style={footerLinkStyle}
               >
                 +33 (0)4 94 56 44 85
               </a>
               <a
                 href="mailto:barrys@lesbarrys.com"
-                style={{
-                  fontFamily: 'var(--font-manrope), sans-serif',
-                  fontSize: '0.8125rem',
-                  color: '#D8C3A5',
-                  transition: 'color 0.3s ease',
-                  textDecoration: 'none',
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
+                className="text-[#D8C3A5] hover:text-[#B9965A] transition-colors duration-300"
+                style={footerLinkStyle}
               >
                 barrys@lesbarrys.com
               </a>
@@ -231,31 +218,25 @@ export default function Footer() {
           <div style={{ display: 'flex', gap: '1.5rem' }}>
             <a
               href="/mentions-legales"
+              className="text-[#D8C3A5]/60 hover:text-[#B9965A] transition-colors duration-300"
               style={{
                 fontFamily: 'var(--font-manrope), sans-serif',
                 fontSize: '0.6875rem',
-                color: 'rgba(216, 195, 165, 0.6)',
                 letterSpacing: '0.05em',
-                transition: 'color 0.3s ease',
                 textDecoration: 'none',
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(216, 195, 165, 0.6)' }}
             >
               Mentions légales
             </a>
             <a
               href="/politique-de-confidentialite"
+              className="text-[#D8C3A5]/60 hover:text-[#B9965A] transition-colors duration-300"
               style={{
                 fontFamily: 'var(--font-manrope), sans-serif',
                 fontSize: '0.6875rem',
-                color: 'rgba(216, 195, 165, 0.6)',
                 letterSpacing: '0.05em',
-                transition: 'color 0.3s ease',
                 textDecoration: 'none',
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(216, 195, 165, 0.6)' }}
             >
               Politique de confidentialité
             </a>

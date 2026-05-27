@@ -1,194 +1,239 @@
 import type { Metadata } from 'next'
-import { Truck, Plane, Car, CheckCircle, ArrowRight } from 'lucide-react'
-import HeroSection from '@/components/HeroSection'
-import ServiceCard from '@/components/ServiceCard'
-import AnimatedSection from '@/components/AnimatedSection'
-import QuoteForm from '@/components/QuoteForm'
+import Link from 'next/link'
+import Image from 'next/image'
+import HeroVideo from '@/components/HeroVideo'
+import PropertyCard from '@/components/PropertyCard'
+import PropertyBackdrop from '@/components/PropertyBackdrop'
+import CountUp from '@/components/CountUp'
+import { venteProperties, locationProperties } from '@/lib/properties'
 
 export const metadata: Metadata = {
   title: 'Accueil',
   description:
-    "TRANS'HORSES : transport de chevaux en France et à l'étranger. Liaisons hebdomadaires Normandie-Paris, Paris-Côte d'Azur. Location de véhicules PL et VL avec ou sans chauffeur.",
+    "Les Barrys — Agence immobilière de prestige dans le Golfe de Saint-Tropez. Villas d’exception à vendre et en location à Gassin, Ramatuelle et Saint-Tropez.",
 }
-
-const trustItems = [
-  {
-    title: 'Chauffeurs professionnels qualifiés',
-    description:
-      'Nos conducteurs sont formés au transport équestre et maîtrisent les exigences du bien-être animal lors de chaque trajet.',
-  },
-  {
-    title: 'Organisation personnalisée',
-    description:
-      'Chaque demande est étudiée sur mesure : itinéraire, horaires, conditions de transport adaptées à votre équidé.',
-  },
-  {
-    title: 'Trajets groupés ou individuels',
-    description:
-      'Profitez de nos liaisons régulières en groupage pour maîtriser vos coûts, ou optez pour un transport privatif.',
-  },
-  {
-    title: 'Suivi et communication tout au long du trajet',
-    description:
-      'Nous vous tenons informé à chaque étape, de la prise en charge à la livraison de votre cheval.',
-  },
-]
-
-const liaisons = [
-  { label: 'Normandie', destination: 'Paris' },
-  { label: 'Paris', destination: 'Côte d\'Azur' },
-  { label: 'France', destination: 'Étranger' },
-]
 
 export default function HomePage() {
   return (
     <>
       {/* ── 1. Hero ── */}
-      <HeroSection
-        title="Transport de chevaux & location de véhicules spécialisés"
-        subtitle="Liaisons hebdomadaires · Groupage · France & étranger — avec ou sans chauffeur"
-        imageUrl="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1920&q=80"
-        imageAlt="Cheval galopant en liberté"
-        ctas={[
-          { label: 'Demander un devis', href: '/services-devis', variant: 'primary' },
-          { label: 'Nous contacter', href: '/contact', variant: 'outline' },
-        ]}
-        height="full"
-        badge="Depuis plus de 20 ans"
+      <HeroVideo
+        videoUrl="https://videos.pexels.com/video-files/34349611/14552730_2560_1440_30fps.mp4"
+        title="L'Immobilier de Prestige"
+        subtitle="Golfe de Saint-Tropez · Depuis 1999"
+        scrollCue
+        cta={{ label: 'Découvrir nos biens', href: '/vente' }}
       />
 
-      {/* ── 2. Nos services ── */}
-      <section className="bg-[#f7f4ef] py-20 px-4">
-        <AnimatedSection className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-[#c8a84b]">
-              Ce que nous proposons
-            </span>
-            <h2
-              className="text-4xl font-bold text-[#1b3a2d] md:text-5xl"
-              style={{ fontFamily: 'var(--font-playfair)' }}
+      {/* ── 2. Statement ── */}
+      <section className="bg-[#F7F3EE] py-32 px-6 text-center">
+        <p
+          className="text-[10px] tracking-[0.4em] uppercase text-[#B9965A] mb-6"
+          style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+        >
+          NOS SERVICES
+        </p>
+        <h2
+          className="text-4xl md:text-6xl font-light italic leading-tight max-w-3xl mx-auto"
+          style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+        >
+          Experts du luxe immobilier
+          <br />
+          sur la presqu&apos;île de Saint-Tropez
+        </h2>
+        <p
+          className="mt-8 text-sm md:text-base text-[#6F7358] max-w-2xl mx-auto leading-relaxed"
+          style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+        >
+          Depuis plus de 20 ans, Les Barrys accompagnent une clientèle exigeante dans
+          l&apos;acquisition et la location de propriétés d&apos;exception sur la presqu&apos;île
+          de Saint-Tropez. Notre connaissance intime du territoire et notre réseau exclusif
+          nous permettent d&apos;offrir un service sur mesure, discret et personnalisé.
+        </p>
+
+        {/* Stats */}
+        <div className="grid md:grid-cols-3 gap-12 mt-20 max-w-5xl mx-auto">
+          <div className="flex flex-col items-center">
+            <span
+              className="text-6xl font-light text-[#B9965A]"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              Nos services
-            </h2>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            <ServiceCard
-              icon={<Truck className="h-6 w-6" />}
-              title="Transport Routier"
-              description="Liaisons hebdomadaires, groupage, trajets individuels. France et étranger."
-              href="/transport-chevaux"
-              imageUrl="https://images.unsplash.com/photo-1535440724399-15ca4f772090?auto=format&fit=crop&w=800&q=80"
-            />
-            <ServiceCard
-              icon={<Plane className="h-6 w-6" />}
-              title="Aérien & Maritime"
-              description="Transport international de chevaux par avion ou bateau, avec toutes les formalités."
-              href="/aerien-maritime"
-              imageUrl="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80"
-            />
-            <ServiceCard
-              icon={<Car className="h-6 w-6" />}
-              title="Location PL & VL"
-              description="Location de poids lourds et véhicules légers, avec ou sans chauffeur."
-              href="/location-poids-lourds"
-              imageUrl="https://images.unsplash.com/photo-1499147463149-adc471bbc639?auto=format&fit=crop&w=800&q=80"
-            />
-          </div>
-        </AnimatedSection>
-      </section>
-
-      {/* ── 3. Liaisons régulières ── */}
-      <section className="bg-[#1b3a2d] py-16 px-4">
-        <AnimatedSection className="mx-auto max-w-5xl text-center">
-          <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-[#c8a84b]">
-            Hebdomadaires
-          </span>
-          <h2
-            className="mb-10 text-3xl font-bold text-white md:text-4xl"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Nos liaisons régulières
-          </h2>
-
-          <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10">
-            {liaisons.map((l, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="rounded-xl border border-white/20 bg-white/10 px-6 py-4 text-center backdrop-blur-sm">
-                  <span className="flex items-center gap-2 text-lg font-semibold text-white">
-                    {l.label}
-                    <ArrowRight className="h-4 w-4 text-[#c8a84b]" />
-                    {l.destination}
-                  </span>
-                </div>
-                {i < liaisons.length - 1 && (
-                  <span className="hidden text-white/30 md:block">|</span>
-                )}
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
-      </section>
-
-      {/* ── 4. Pourquoi nous choisir ── */}
-      <section className="bg-[#f7f4ef] py-20 px-4">
-        <AnimatedSection className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-[#c8a84b]">
-              Notre engagement
+              <CountUp end={20} suffix=" ans" />
             </span>
-            <h2
-              className="text-4xl font-bold text-[#1b3a2d] md:text-5xl"
-              style={{ fontFamily: 'var(--font-playfair)' }}
+            <p
+              className="text-sm text-[#6F7358] uppercase tracking-widest mt-3"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
             >
-              Pourquoi nous choisir
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {trustItems.map((item) => (
-              <div
-                key={item.title}
-                className="flex gap-4 rounded-2xl bg-white p-6 shadow-sm"
-              >
-                <div className="flex-shrink-0">
-                  <CheckCircle className="h-7 w-7 text-[#c8a84b]" />
-                </div>
-                <div>
-                  <h3 className="mb-1.5 text-lg font-semibold text-[#1b3a2d]">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-[#6b7280]">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
-      </section>
-
-      {/* ── 5. Demande rapide ── */}
-      <section className="bg-white py-20 px-4">
-        <AnimatedSection className="mx-auto max-w-3xl">
-          <div className="mb-10 text-center">
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-[#c8a84b]">
-              Gratuit & sans engagement
-            </span>
-            <h2
-              className="text-4xl font-bold text-[#1b3a2d] md:text-5xl"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Demande rapide
-            </h2>
-            <p className="mt-4 text-[#6b7280]">
-              Remplissez le formulaire ci-dessous et nous vous répondrons dans
-              les plus brefs délais.
+              d&apos;expertise locale
             </p>
           </div>
+          <div className="flex flex-col items-center">
+            <span
+              className="text-6xl font-light text-[#B9965A]"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              <CountUp end={10} suffix=" biens" />
+            </span>
+            <p
+              className="text-sm text-[#6F7358] uppercase tracking-widest mt-3"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              d&apos;exception en portefeuille
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <span
+              className="text-6xl font-light text-[#B9965A]"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              <CountUp end={2} />
+            </span>
+            <p
+              className="text-sm text-[#6F7358] uppercase tracking-widest mt-3"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              adresses au cœur du Golfe
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <QuoteForm />
-        </AnimatedSection>
+      {/* ── 3. Vente ── */}
+      <section className="bg-[#1F1D1A] py-24 px-6 relative">
+        <PropertyBackdrop />
+        <div className="relative z-10 max-w-[1440px] mx-auto">
+          {/* Section header */}
+          <div className="flex items-end justify-between mb-12">
+            <h2
+              className="text-5xl font-light italic text-white"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              Biens à la Vente
+            </h2>
+            <Link
+              href="/vente"
+              className="text-xs tracking-widest uppercase text-[#B9965A] hover:text-[#D8C3A5] transition-colors"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              Voir tous →
+            </Link>
+          </div>
+
+          {/* Grid */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {venteProperties.slice(0, 3).map((p, i) => (
+              <PropertyCard key={p.slug} {...p} index={i} />
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="mt-14 text-center">
+            <Link
+              href="/vente"
+              className="btn-outline text-white border-white hover:bg-white hover:text-[#1F1D1A]"
+            >
+              Voir toutes nos propriétés
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Location saisonnière ── */}
+      <section className="bg-[#F7F3EE] py-24 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="flex items-end justify-between mb-12">
+            <h2
+              className="text-5xl font-light italic text-[#1F1D1A]"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              Location Saisonnière
+            </h2>
+            <Link
+              href="/locations-saisonnieres"
+              className="text-xs tracking-widest uppercase text-[#B9965A] hover:text-[#1F1D1A] transition-colors"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              Voir tous →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {locationProperties.slice(0, 2).map((p, i) => (
+              <PropertyCard key={p.slug} {...p} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Estimation CTA ── */}
+      <section className="bg-[#B9965A] py-24 px-6 text-center">
+        <h2
+          className="text-5xl font-light italic text-white max-w-2xl mx-auto"
+          style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+        >
+          Vous souhaitez vendre&nbsp;?
+        </h2>
+        <p
+          className="mt-6 text-white/80 max-w-xl mx-auto text-sm md:text-base"
+          style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+        >
+          Bénéficiez de l&apos;expertise de nos négociateurs pour estimer votre bien au
+          juste prix.
+        </p>
+        <Link
+          href="/estimation"
+          className="mt-10 inline-flex items-center justify-center border border-white text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-white hover:text-[#B9965A] transition-colors"
+          style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+        >
+          Estimation gratuite
+        </Link>
+      </section>
+
+      {/* ── 6. Agence ── */}
+      <section className="bg-[#1F1D1A] py-24 px-6">
+        <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left */}
+          <div>
+            <p
+              className="text-[10px] tracking-[0.4em] uppercase text-[#B9965A] mb-6"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              LES BARRYS
+            </p>
+            <h2
+              className="text-4xl md:text-5xl font-light italic text-white leading-tight"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              Une agence d&apos;exception
+              <br />
+              au cœur du Golfe
+            </h2>
+            <p
+              className="mt-8 text-sm text-[#D8C3A5] leading-relaxed max-w-lg"
+              style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
+            >
+              Depuis 1999, Les Barrys cultivent une présence unique sur la presqu&apos;île
+              de Saint-Tropez. Notre philosophie repose sur la discrétion, l&apos;excellence
+              et une expertise géographique sans égale. Chaque mandat est traité avec la
+              même exigence, qu&apos;il s&apos;agisse d&apos;une villa en bord de mer ou d&apos;un
+              domaine viticole.
+            </p>
+            <Link href="/notre-agence" className="btn-outline text-white border-white mt-10">
+              Notre histoire
+            </Link>
+          </div>
+
+          {/* Right — image */}
+          <div className="relative h-[500px]">
+            <Image
+              src="https://images.unsplash.com/photo-1760681556931-52ee66c4d88f?auto=format&fit=crop&w=1200&q=85"
+              alt="Les Barrys — agence de prestige"
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        </div>
       </section>
     </>
   )

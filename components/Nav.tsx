@@ -94,24 +94,15 @@ export default function Nav() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  className={[
+                    'nav-link whitespace-nowrap transition-colors duration-300',
+                    isActive(link.href) ? 'text-[#B9965A]' : 'hover:text-[#B9965A]',
+                  ].join(' ')}
                   style={{
                     fontFamily: 'var(--font-manrope), sans-serif',
                     fontSize: '0.75rem',
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: isActive(link.href) ? '#B9965A' : 'currentColor',
-                    transition: 'color 0.3s ease',
-                    whiteSpace: 'nowrap',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive(link.href)) {
-                      (e.currentTarget as HTMLElement).style.color = '#B9965A'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive(link.href)) {
-                      (e.currentTarget as HTMLElement).style.color = 'currentColor'
-                    }
                   }}
                 >
                   {link.label}
@@ -123,6 +114,7 @@ export default function Nav() {
             <div className="hidden lg:block">
               <Link
                 href="/estimation"
+                className="hover:bg-[#1F1D1A] hover:text-[#F7F3EE] transition-colors duration-300"
                 style={{
                   fontFamily: 'var(--font-manrope), sans-serif',
                   fontSize: '0.75rem',
@@ -130,18 +122,8 @@ export default function Nav() {
                   textTransform: 'uppercase',
                   border: '1px solid currentColor',
                   padding: '0.5rem 1.25rem',
-                  transition: 'background-color 0.3s ease, color 0.3s ease',
                   whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.backgroundColor = '#1F1D1A'
-                  el.style.color = '#F7F3EE'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.backgroundColor = 'transparent'
-                  el.style.color = 'currentColor'
+                  display: 'inline-block',
                 }}
               >
                 Estimation
