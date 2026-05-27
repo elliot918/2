@@ -16,62 +16,15 @@ export interface Property {
   category: "prestige" | "vacances";
 }
 
-function img(id: string, w = 1200, q = 85): string {
-  return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=${q}`;
+/** Build a real Les Barrys CDN URL */
+function p(folder: string, hash: string, ext = "jpg"): string {
+  return `https://barry.staticlbi.com/1600xauto/images/biens/1/${folder}/photo_${hash}.${ext}`;
 }
 
-// Primary cover images (one per property)
-const COVER = {
-  california:    "photo-1680287296835-0424869199ae",
-  villasolea:    "photo-1690832307571-d78b5d346651",
-  lephoenix:     "photo-1757264119016-7e6b568b810d",
-  tahiti:        "photo-1728926533519-7d18177c177f",
-  bayview:       "photo-1760681556931-52ee66c4d88f",
-  belvedere:     "photo-1729881769765-c341bd1262a6",
-  pinetrees:     "photo-1603033825246-53b4d1e5c509",
-  californienne: "photo-1665575471924-f7356d8e85a6",
-  tamaris:       "photo-1765999906700-2d4dfd392966",
-  figuaniere:    "photo-1596178067639-5c6e68aea6dc",
-} as const;
-
-// Shared gallery pool — all distinct from any cover image above
-const G = {
-  // Pools / luxury exteriors
-  poolInfinity:       "photo-1613490493576-4ca1f69cd85c", // Mediterranean infinity pool, lounge chairs
-  mansionPool:        "photo-1512917774080-9991f1c4c750", // white mansion with pool
-  modernVillaExt:     "photo-1580587771525-78b9dba3b914", // modern white villa exterior
-  modernHousePool:    "photo-1600596542815-ffad4c1539a9", // sleek house with lit pool
-  poolGarden:         "photo-1566073771259-6a8506099945", // garden pool with sun loungers
-  poolLounge:         "photo-1574362848149-11496d93a7c7", // pool chairs & parasols
-  villaPoolVeranda:   "photo-1757439402359-aed14d39fc1b", // luxury villa with pool (verified)
-  modernHouseLounge:  "photo-1778205063665-23257f2dc408", // modern house, pool+lounge (verified)
-  modernHouseGardens: "photo-1778910554261-837b19e25c26", // large modern house, manicured garden (verified)
-
-  // Interiors
-  livingWhite:        "photo-1600210492486-724fe5c67fb0", // all-white high-ceiling living room
-  livingModern:       "photo-1560185007-cde436f6a4d0",   // contemporary sofa & art
-  livingOceanView:    "photo-1772411650649-f88111bcb8a5", // living room, floor-to-ceiling sea view (verified)
-  livingIndoorOut:    "photo-1778640331184-dc4c3e2608e1", // indoor/outdoor living room, pool beyond (verified)
-  livingComfy:        "photo-1757262798623-a215e869d708", // warm sectional sofa with bar (verified)
-  kitchenWhite:       "photo-1567767292278-a4f21aa2d36e", // white marble kitchen
-  luxuryLounge:       "photo-1556020685-ae41abfc9365",   // tan velvet sofa, luxury décor
-  outdoorDining:      "photo-1502005229762-cf1b2da7c5d6", // alfresco dining terrace
-  houseGardenExt:     "photo-1564013799919-ab600027ffc6", // villa exterior with lush garden
-
-  // Sea views & terraces
-  terraceGreece:      "photo-1533105079780-92b9be482077", // whitewashed terrace, Aegean
-  terraceBalconyMenu: "photo-1693098243367-93320637839e", // balcony breakfast table, sea (verified)
-  balconyCoastal:     "photo-1769869173719-997e7be14a56", // balcony overlooking coastal town (verified)
-  balconyPanoramic:   "photo-1772902362618-c45e3e804001", // tiered hotel balconies, Monaco (verified)
-  patioDubrovnik:     "photo-1694350639569-6706d403a30d", // patio chairs, Adriatic view (verified)
-
-  // Bedrooms
-  bedroomClassic:     "photo-1522771739844-6a9f6a868ed8", // white luxury bedroom
-  bedroomContempo:    "photo-1618221195710-dd6b41faaea6", // modern bedroom with statement art
-  bedroomPoolView:    "photo-1616046229478-9901c5536a45", // bedroom opening to pool terrace
-} as const;
-
 export const properties: Property[] = [
+
+  // ── VENTE ────────────────────────────────────────────────────────────────
+
   {
     slug: "california",
     name: "CALIFORNIA",
@@ -83,85 +36,75 @@ export const properties: Property[] = [
     land: 25000,
     price: 19950000,
     priceDisplay: "19 950 000 €",
-    imageUrl: img(COVER.california, 1920),
+    imageUrl: p("efea9c4ded7403ad446868428dd18c05", "b44d35a1f5adc447dada7d094aa8502e"),
     images: [
-      img(G.poolInfinity),        // infinity pool, Mediterranean
-      img(G.livingWhite),         // all-white living room
-      img(G.terraceBalconyMenu),  // sea-view terrace
-      img(G.poolGarden),          // pool & garden
-      img(G.bedroomClassic),      // luxury bedroom
+      p("efea9c4ded7403ad446868428dd18c05", "b44d35a1f5adc447dada7d094aa8502e"),
+      p("efea9c4ded7403ad446868428dd18c05", "681b9dc9b4cb1d4b56b60e13c1a929dc", "png"),
+      p("efea9c4ded7403ad446868428dd18c05", "b8dd7792b151ecbba97b61e4925cf400", "png"),
+      p("efea9c4ded7403ad446868428dd18c05", "104ffc30c5bb06b30773a43c4476873d", "png"),
+      p("efea9c4ded7403ad446868428dd18c05", "65e9a7886adb3d696feba1d87198403d"),
+      p("efea9c4ded7403ad446868428dd18c05", "2a432f7d3e268d95345e94fa34288f8c"),
+      p("efea9c4ded7403ad446868428dd18c05", "13390bac3ba065b92205f8c124f62f78"),
+      p("efea9c4ded7403ad446868428dd18c05", "09faf959cc6a1568cf9fd6a952518319"),
+      p("efea9c4ded7403ad446868428dd18c05", "d64b072cfebb66af2505a00f2759c13c"),
+      p("efea9c4ded7403ad446868428dd18c05", "f75493dac64f9a9d0f0ed2151021effb"),
     ],
     description:
-      "Propriété d'exception dominant le Golfe de Saint-Tropez, cette villa de 500 m² offre des panoramas à couper le souffle sur la mer et les vignes. Architecture contemporaine mêlant pierre locale et volumes généreux, dans un parc arboré de 2,5 hectares.",
+      "Villa de prestige sur la commune de Gassin dominant le Golfe de Saint-Tropez avec des vues panoramiques sur la mer. Construction neuve 2025, cette propriété de 500 m² propose un double salon TV, salle à manger lumineuse, cuisine équipée, second salon bar, 5 chambres et une suite parentale avec dressing sur-mesure et salle de bain d'exception vue mer. Appartement invité indépendant, salle de sport privée, sauna, salle de massage, piscine chauffée vue mer.",
     features: [
-      "Piscine à débordement",
-      "Vue mer panoramique",
-      "Parc de 25 000 m²",
-      "Dépendances",
-      "Cave à vin",
-      "Système domotique",
+      "Piscine chauffée vue mer",
+      "Suite parentale & dressing",
+      "Appartement invité indépendant",
+      "Salle de sport · Sauna · Massage",
+      "Vue panoramique sur le Golfe",
+      "Construction neuve 2025",
+      "Parc de 2,5 hectares",
+      "Garage",
     ],
     category: "prestige",
   },
-  {
-    slug: "villa-solea",
-    name: "Villa Soléa",
-    location: "Ramatuelle",
-    type: "vente",
-    surface: 510,
-    rooms: 10,
-    price: 15900000,
-    priceDisplay: "15 900 000 €",
-    imageUrl: img(COVER.villasolea, 1920),
-    images: [
-      img(G.mansionPool),         // white mansion with pool
-      img(G.livingModern),        // contemporary living room
-      img(G.balconyCoastal),      // balcony overlooking sea
-      img(G.outdoorDining),       // alfresco dining terrace
-      img(G.bedroomContempo),     // modern bedroom
-    ],
-    description:
-      "Nichée dans les hauteurs de Ramatuelle, cette villa somptueuse de 510 m² bénéficie d'une situation privilégiée à quelques minutes des plages de Pampelonne. Espaces de vie ouverts sur la terrasse et la piscine à débordement.",
-    features: [
-      "Vue mer",
-      "Piscine à débordement",
-      "10 pièces",
-      "Terrasses panoramiques",
-      "Jardin paysager",
-      "Pool-house",
-    ],
-    category: "prestige",
-  },
+
   {
     slug: "le-phoenix",
-    name: "Le Phoenix",
+    name: "LE PHOENIX",
     location: "Ramatuelle",
     type: "vente",
     surface: 350,
     rooms: 11,
+    bedrooms: 7,
     land: 10200,
     price: 9300000,
     priceDisplay: "9 300 000 €",
-    imageUrl: img(COVER.lephoenix, 1920),
+    imageUrl: p("f55506af5d97aeac398ec9f30903a083", "8006b907f8ab9bbd6319e5c74584a4c5"),
     images: [
-      img(G.modernVillaExt),      // modern white villa exterior
-      img(G.livingIndoorOut),     // indoor/outdoor living
-      img(G.patioDubrovnik),      // patio with sea view
-      img(G.modernHouseGardens),  // manicured garden
-      img(G.kitchenWhite),        // white marble kitchen
+      p("f55506af5d97aeac398ec9f30903a083", "8006b907f8ab9bbd6319e5c74584a4c5"),
+      p("f55506af5d97aeac398ec9f30903a083", "9e8579424418e6726da67e419c244f03"),
+      p("f55506af5d97aeac398ec9f30903a083", "5a8428cc459e71fdabbb546fa73405b8"),
+      p("f55506af5d97aeac398ec9f30903a083", "50a070d846977850ab85f5d7183f5d84"),
+      p("f55506af5d97aeac398ec9f30903a083", "379f17440ed1788c3d4dabf2501a088c"),
+      p("f55506af5d97aeac398ec9f30903a083", "e6ef28f03876064bfdc960e5c39a326e"),
+      p("f55506af5d97aeac398ec9f30903a083", "09d9c19ec8701f0eff01f4b3c21531b1"),
+      p("f55506af5d97aeac398ec9f30903a083", "619514ae7bccc58d947dfdd6e7853734"),
+      p("f55506af5d97aeac398ec9f30903a083", "21d2a6554bcc2f67f5e3851d90f26af0"),
+      p("f55506af5d97aeac398ec9f30903a083", "be3b0fde494787c2bf14a267979db0f5"),
+      p("f55506af5d97aeac398ec9f30903a083", "d740b2b5ee3f4beb1ef857ee0b442cd8"),
+      p("f55506af5d97aeac398ec9f30903a083", "473aebc5485d29344401bc07a7d62c86"),
     ],
     description:
-      "Villa d'architecte de 350 m² implantée sur 1 hectare de terrain arboré avec vue dégagée sur le massif des Maures. Lignes épurées et matériaux nobles pour une propriété hors du commun.",
+      "Propriété d'exception à Ramatuelle dans un environnement idyllique et un secteur prisé, à proximité des plages de Pampelonne. Cette villa de plain-pied de plus de 350 m² déploie un salon sud ouvert sur de grandes terrasses donnant sur la pinède, 7 suites, deux piscines dont une pour enfants, une végétation diversifiée et une annexe personnel. Vues dégagées sur la mer et la campagne.",
     features: [
+      "2 piscines (dont enfants)",
+      "7 suites",
       "Terrain 10 200 m²",
-      "Vue massif des Maures",
-      "Piscine",
-      "11 pièces",
-      "Garage",
-      "Alarme",
+      "Vue mer & campagne",
+      "Annexe personnel",
+      "Climatisation réversible",
+      "Volets électriques · Portail auto",
+      "Garage + carport",
     ],
     category: "prestige",
   },
+
   {
     slug: "tahiti",
     name: "TAHITI",
@@ -169,87 +112,118 @@ export const properties: Property[] = [
     type: "vente",
     surface: 250,
     rooms: 7,
+    bedrooms: 5,
     land: 2935,
     price: 8700000,
     priceDisplay: "8 700 000 €",
-    imageUrl: img(COVER.tahiti, 1920),
+    imageUrl: p("61587ad2d65d9e05d767f10146b0adea", "dcc9b546ce3a5958a9acf62ef6854d9d"),
     images: [
-      img(G.villaPoolVeranda),    // villa pool & veranda
-      img(G.livingComfy),         // warm, comfy living room
-      img(G.terraceGreece),       // whitewashed terrace, sea
-      img(G.houseGardenExt),      // villa with lush garden
-      img(G.bedroomPoolView),     // bedroom opening to pool
+      p("61587ad2d65d9e05d767f10146b0adea", "dcc9b546ce3a5958a9acf62ef6854d9d"),
+      p("61587ad2d65d9e05d767f10146b0adea", "51df4a0d21abfc728936665123abbbf2"),
+      p("61587ad2d65d9e05d767f10146b0adea", "e9f1b272eb4475782d703bb1a0294cbd"),
+      p("61587ad2d65d9e05d767f10146b0adea", "2115f48d5b2f6e18576e34f6201d9033"),
+      p("61587ad2d65d9e05d767f10146b0adea", "c923c13ddbd9a67b43989dca36e1ec05"),
+      p("61587ad2d65d9e05d767f10146b0adea", "aa0c4eb5ffb37e3452863693657a9276"),
+      p("61587ad2d65d9e05d767f10146b0adea", "f77870acf49f0fe073aedb3cc3814e40"),
+      p("61587ad2d65d9e05d767f10146b0adea", "d2fdb2e53cc6d7c31ba02796280493cf"),
+      p("61587ad2d65d9e05d767f10146b0adea", "3000bd31169a30d1968ff72a78bae954"),
+      p("61587ad2d65d9e05d767f10146b0adea", "ba728871fa04980dbc86fa38a5db5dd6"),
+      p("61587ad2d65d9e05d767f10146b0adea", "6604f7c22931441896f3b942939a6d9d"),
+      p("61587ad2d65d9e05d767f10146b0adea", "bcea57334d67d2d400c0a056856e90ba"),
+      p("61587ad2d65d9e05d767f10146b0adea", "bb15514d482c6cea6bc6cb7abdf7f4b8"),
+      p("61587ad2d65d9e05d767f10146b0adea", "ff658197c4ae476971d41defe1919322"),
     ],
     description:
-      "À deux pas de la mythique plage de Pampelonne, cette villa de charme de 250 m² jouit d'un emplacement rare à Ramatuelle. Esprit méditerranéen, jardin luxuriant et piscine chauffée.",
+      "Villa idéalement située à proximité immédiate de la plage de Pampelonne, secteur Tahiti Beach. En deuxième ligne, cette propriété se déploie sur un terrain plat de près de 3 000 m². Elle comprend cinq suites dont une suite parentale avec vue mer partielle à l'étage, et présente un potentiel d'extension. L'accès à la plage à pied en quelques minutes en fait une rare opportunité.",
     features: [
-      "Plage à 500m",
+      "Secteur Tahiti Beach",
+      "Deuxième ligne plage",
+      "5 suites",
+      "Terrain plat 2 935 m²",
+      "Vue mer partielle",
+      "Potentiel d'extension",
+    ],
+    category: "prestige",
+  },
+
+  {
+    slug: "ange",
+    name: "ANGE",
+    location: "Gassin",
+    type: "vente",
+    surface: 240,
+    rooms: 6,
+    bedrooms: 5,
+    land: 1170,
+    price: 0,
+    priceDisplay: "Prix sur demande",
+    imageUrl: p("dd54dda252a2070fcf7ea86f84943354", "675d2a8ee369d5368b44a9b1b6924d05"),
+    images: [
+      p("dd54dda252a2070fcf7ea86f84943354", "675d2a8ee369d5368b44a9b1b6924d05"),
+      p("dd54dda252a2070fcf7ea86f84943354", "7ce11a37e18da75aa1a267c5a6711522"),
+      p("dd54dda252a2070fcf7ea86f84943354", "76b00074f58b0bb96728b3ecbfe2c087"),
+      p("dd54dda252a2070fcf7ea86f84943354", "330336c907f90d97911b165cce1d5528"),
+      p("dd54dda252a2070fcf7ea86f84943354", "7e875fa90f8de37796d37a7f69131805"),
+      p("dd54dda252a2070fcf7ea86f84943354", "8e962f692a2093334b27af9192e9a921"),
+      p("dd54dda252a2070fcf7ea86f84943354", "5a64ddb694a0b9da4b01ae9458bfee54"),
+      p("dd54dda252a2070fcf7ea86f84943354", "8c2c2ed75dedebb01a86664370b0b1dc"),
+      p("dd54dda252a2070fcf7ea86f84943354", "bfb0b3d228e52a58122b41b29c3e8d54"),
+      p("dd54dda252a2070fcf7ea86f84943354", "53fde3a5286a022ec8dbef8e92167510"),
+      p("dd54dda252a2070fcf7ea86f84943354", "7c2c324031c0d31ee64330e4e4b60476"),
+      p("dd54dda252a2070fcf7ea86f84943354", "1cdfc4415669ddbc6b5d9e7577a3220b"),
+      p("dd54dda252a2070fcf7ea86f84943354", "08efbce0ab0ae9a7e366d4646cfec27b"),
+      p("dd54dda252a2070fcf7ea86f84943354", "b0268cff0ca558906bb1fb5166968d9d"),
+      p("dd54dda252a2070fcf7ea86f84943354", "c64b8e36750177fd6c0a23292d6210b6"),
+      p("dd54dda252a2070fcf7ea86f84943354", "f8155de233dee3955a15c2661d9268a8"),
+    ],
+    description:
+      "Située dans un quartier prisé et résidentiel de Gassin, cette villa au charme indéniable accueille par un vaste hall d'entrée. La vue mer est omniprésente depuis la suite parentale avec terrasse privative jusqu'aux quatre chambres supplémentaires. Piscine chauffée, salle de massage et sauna indépendants, espaces de vie soignés — une propriété d'exception aux prestations cinq étoiles.",
+    features: [
+      "Vue mer depuis toutes les chambres",
       "Piscine chauffée",
-      "Terrain 2 935 m²",
-      "7 pièces",
-      "Terrasse sud",
-      "Parking",
+      "Suite parentale avec terrasse",
+      "Salle de massage & sauna indép.",
+      "Cuisine américaine équipée",
+      "Climatisation · Cheminée · Alarme",
+      "Portail auto · Interphone vidéo",
+      "3 parkings",
     ],
     category: "prestige",
   },
+
   {
-    slug: "bay-view",
-    name: "BAY VIEW",
-    location: "Gassin",
+    slug: "del-mare",
+    name: "DEL MARE",
+    location: "Saint-Tropez",
     type: "vente",
-    surface: 300,
+    surface: 160,
     rooms: 7,
-    land: 1651,
-    price: 7200000,
-    priceDisplay: "7 200 000 €",
-    imageUrl: img(COVER.bayview, 1920),
+    bedrooms: 5,
+    land: 1208,
+    price: 5480000,
+    priceDisplay: "5 480 000 €",
+    imageUrl: p("799f7575439552fea311e41dedac7fbb", "bec5bcbe624952f1f60c47700425004e"),
     images: [
-      img(G.modernHousePool),     // sleek house with pool at night
-      img(G.livingOceanView),     // living room with sea panorama
-      img(G.balconyPanoramic),    // tiered panoramic balconies
-      img(G.poolLounge),          // pool chairs & parasols
+      p("799f7575439552fea311e41dedac7fbb", "bec5bcbe624952f1f60c47700425004e"),
+      p("799f7575439552fea311e41dedac7fbb", "0035e3fc6215249bb49d623426994ca3"),
+      p("799f7575439552fea311e41dedac7fbb", "311a3735127de9768804fc497ca84258"),
+      p("799f7575439552fea311e41dedac7fbb", "cda63ba7a3423433c3c70b89155fd36c"),
+      p("799f7575439552fea311e41dedac7fbb", "d1cda14320b33ad7e7a011087f7dd4c0"),
+      p("799f7575439552fea311e41dedac7fbb", "7541a0ffe189ebe8f14af3364c036c30"),
     ],
     description:
-      "Surplombant la baie de Saint-Tropez, cette villa contemporaine de 300 m² offre une vue époustouflante sur le Golfe. Volumes modernes, terrasses filantes et piscine à débordement.",
+      "Propriété rare à quelques pas de la plage des Salins, dans une impasse calme au sein d'un domaine sécurisé des Canoubiers à Saint-Tropez. Le permis de construire en cours d'instruction prévoit la création d'une belle villa provençale contemporaine d'environ 350 m² avec piscine — une opportunité unique d'investissement dans l'un des quartiers les plus recherchés.",
     features: [
-      "Vue Golfe de Saint-Tropez",
-      "Piscine à débordement",
-      "7 pièces",
-      "Terrain 1 651 m²",
-      "Cuisine équipée haut de gamme",
-      "Double garage",
+      "À pied plage des Salins",
+      "Domaine sécurisé",
+      "Projet villa ~350 m² avec PC",
+      "Piscine (projet)",
+      "Terrain 1 208 m²",
+      "Quartier des Canoubiers",
     ],
     category: "prestige",
   },
-  {
-    slug: "belvedere",
-    name: "BELVEDERE",
-    location: "Gassin",
-    type: "vente",
-    surface: 350,
-    rooms: 11,
-    bedrooms: 7,
-    price: 7000000,
-    priceDisplay: "7 000 000 €",
-    imageUrl: img(COVER.belvedere, 1920),
-    images: [
-      img(G.modernHouseLounge),   // pool + lounge chairs, modern house
-      img(G.luxuryLounge),        // tan velvet sofa living room
-      img(G.balconyCoastal),      // balcony overlooking coastal town
-      img(G.bedroomContempo),     // contemporary bedroom
-    ],
-    description:
-      "Du sommet du village médiéval de Gassin, ce belvédère offre un panorama 180° sur la presqu'île de Saint-Tropez. Villa de 350 m² en parfait état, décoration soignée et espaces extérieurs généreux.",
-    features: [
-      "Panorama 180°",
-      "7 chambres",
-      "11 pièces",
-      "Piscine",
-      "Terrasse panoramique",
-      "Village médiéval à pied",
-    ],
-    category: "prestige",
-  },
+
   {
     slug: "pine-trees",
     name: "PINE TREES",
@@ -258,114 +232,186 @@ export const properties: Property[] = [
     surface: 220,
     rooms: 7,
     bedrooms: 5,
+    land: 2400,
     price: 5500000,
     priceDisplay: "5 500 000 €",
-    imageUrl: img(COVER.pinetrees, 1920),
+    imageUrl: p("7e864b7b5d2d812301e3ed6e20103740", "60146005530c34d86b15bcde5347ee76"),
     images: [
-      img(G.mansionPool),         // classic mansion with pool
-      img(G.livingModern),        // contemporary living room
-      img(G.terraceGreece),       // sea-view terrace
-      img(G.poolGarden),          // pool in garden
-      img(G.bedroomClassic),      // classic white bedroom
+      p("7e864b7b5d2d812301e3ed6e20103740", "60146005530c34d86b15bcde5347ee76"),
+      p("7e864b7b5d2d812301e3ed6e20103740", "36e4b7ec81f94b02965e5a6b06a8096d"),
+      p("7e864b7b5d2d812301e3ed6e20103740", "b567194ea2137d7f415aedd15b4802e6"),
     ],
     description:
-      "Élégante villa de 220 m² au cœur d'un quartier résidentiel prisé de Saint-Tropez, à proximité immédiate du port et des plages. Architecture tropézienne authentique sublimée par une rénovation contemporaine.",
+      "Située au bout d'une impasse récemment rénovée, au cœur d'une pinède, cette villa de plus de 220 m² se trouve à moins de 10 minutes à pied de la plage des Canebiers à Saint-Tropez. Cinq chambres en suite, un vaste salon lumineux avec cheminée, terrain plat de 2 400 m² et piscine 10 × 5 m dans un cadre de verdure préservé.",
     features: [
-      "À 5 min du port",
-      "5 chambres",
-      "Piscine",
-      "7 pièces",
-      "Jardin privatif",
-      "Climatisation",
+      "5 chambres en suite",
+      "À 10 min plage des Canebiers",
+      "Piscine 10 × 5 m",
+      "Terrain plat 2 400 m²",
+      "Salon avec cheminée",
+      "Portail auto · Alarme",
+      "Climatisation · WiFi",
     ],
     category: "prestige",
   },
+
+  // ── LOCATION ─────────────────────────────────────────────────────────────
+
   {
     slug: "californienne",
-    name: "Californienne",
+    name: "CALIFORNIENNE",
     location: "Gassin",
     type: "location",
     surface: 500,
-    rooms: 7,
-    price: 50000,
-    priceDisplay: "À partir de 50 000 €/sem.",
-    imageUrl: img(COVER.californienne, 1920),
-    images: [
-      img(G.poolInfinity),        // infinity pool Mediterranean
-      img(G.livingWhite),         // all-white living room
-      img(G.terraceBalconyMenu),  // sea-view breakfast terrace
-      img(G.modernHouseGardens),  // manicured garden
-      img(G.bedroomPoolView),     // bedroom opening to pool
-    ],
-    description:
-      "Villa de luxe de 500 m² dominant le Golfe, idéale pour des vacances d'exception. Piscine à débordement, nombreuses terrasses et prestations cinq étoiles dans un cadre incomparable.",
-    features: [
-      "500 m²",
-      "7 pièces",
-      "Piscine à débordement",
-      "Vue mer",
-      "Service conciergerie",
-      "Climatisation",
-    ],
-    category: "vacances",
-  },
-  {
-    slug: "tamaris",
-    name: "TAMARIS",
-    location: "Saint-Tropez",
-    type: "location",
-    surface: 520,
-    rooms: 12,
-    bedrooms: 9,
-    price: 0,
-    priceDisplay: "Prix sur demande",
-    imageUrl: img(COVER.tamaris, 1920),
-    images: [
-      img(G.modernVillaExt),      // modern villa exterior
-      img(G.livingIndoorOut),     // indoor/outdoor living
-      img(G.patioDubrovnik),      // sea-view patio
-      img(G.poolLounge),          // pool lounge chairs
-      img(G.bedroomContempo),     // contemporary bedroom
-    ],
-    description:
-      "Demeure d'exception de 520 m² dans l'un des quartiers les plus exclusifs de Saint-Tropez. 9 chambres, piscine, court de tennis et parc pour accueillir famille et amis dans un luxe absolu.",
-    features: [
-      "520 m²",
-      "9 chambres",
-      "Piscine",
-      "Court de tennis",
-      "Parc arboré",
-      "Chef privé sur demande",
-    ],
-    category: "vacances",
-  },
-  {
-    slug: "figuaniere",
-    name: "FIGUANIERE",
-    location: "Ramatuelle",
-    type: "location",
-    surface: 440,
-    rooms: 8,
+    rooms: 9,
     bedrooms: 6,
+    land: 25000,
     price: 0,
     priceDisplay: "Prix sur demande",
-    imageUrl: img(COVER.figuaniere, 1920),
+    imageUrl: p("76fd570c62202ef2f5ccd5e1d43e0829", "b44d35a1f5adc447dada7d094aa8502e"),
     images: [
-      img(G.modernHouseLounge),   // pool + lounge, modern house
-      img(G.livingComfy),         // warm living room
-      img(G.balconyPanoramic),    // panoramic balconies
-      img(G.outdoorDining),       // alfresco dining
-      img(G.kitchenWhite),        // white kitchen
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "b44d35a1f5adc447dada7d094aa8502e"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "681b9dc9b4cb1d4b56b60e13c1a929dc", "png"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "b8dd7792b151ecbba97b61e4925cf400", "png"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "104ffc30c5bb06b30773a43c4476873d", "png"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "65e9a7886adb3d696feba1d87198403d"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "2a432f7d3e268d95345e94fa34288f8c"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "13390bac3ba065b92205f8c124f62f78"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "09faf959cc6a1568cf9fd6a952518319"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "d64b072cfebb66af2505a00f2759c13c"),
+      p("76fd570c62202ef2f5ccd5e1d43e0829", "f75493dac64f9a9d0f0ed2151021effb"),
     ],
     description:
-      "Nichée dans la pinède de la Figuanière, cette villa de 440 m² alliant charme provençal et modernité est idéalement située à 10 minutes des plages de Pampelonne.",
+      "Nichée dans un domaine privé de Gassin, à quelques minutes de Saint-Tropez et des plages de Pampelonne, cette villa neuve 2025 de 500 m² offre des vues panoramiques spectaculaires sur le Golfe. Double salon, salle à manger, cuisine équipée, salon bar, 5 chambres et suite parentale vue mer, appartement indépendant, salle de sport, sauna, massage, piscine chauffée.",
     features: [
-      "440 m²",
-      "6 chambres",
-      "Piscine",
-      "Jacuzzi",
-      "Salle de sport",
-      "Proche Pampelonne",
+      "500 m² · 6 chambres",
+      "Piscine chauffée vue mer",
+      "Suite parentale avec vue mer",
+      "Salle de sport · Sauna · Massage",
+      "Appartement invité indépendant",
+      "Service conciergerie",
+      "Parc de 2,5 hectares",
+      "Garage",
+    ],
+    category: "vacances",
+  },
+
+  {
+    slug: "may-flower",
+    name: "MAY FLOWER",
+    location: "Gassin",
+    type: "location",
+    surface: 400,
+    rooms: 12,
+    bedrooms: 8,
+    land: 3800,
+    price: 0,
+    priceDisplay: "Prix sur demande",
+    imageUrl: p("40fd4d39d0e47481464a7480dc3ff614", "07bc49b2ad2d968e371607aaced8e5b6"),
+    images: [
+      p("40fd4d39d0e47481464a7480dc3ff614", "07bc49b2ad2d968e371607aaced8e5b6"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "5067980f5283708e07ed38a6ca4c96f5"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "a8e5ce0d79ac46ee2d7aa309ff9c8d69"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "d1740fd5d619e722d96c4c596c4166b2"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "d17bb0257e4fdf6804bec8fb43a6b65e"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "8fd8af9fc8db6eb4b3ef43c55c2cb588"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "ca14135bb45e70795fb7ed6b4d948d1f"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "25046d2da9dbceecb5183650be0a1b93"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "7bb0f02936b04d72e280b6b08b0e6cec"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "aca92f0bfb79d61233b017d25c23cd57"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "e6388efc84407f0a67afe391275c20c1"),
+      p("40fd4d39d0e47481464a7480dc3ff614", "763b4c42b8d552a63cf7e1f5cb5031e6"),
+    ],
+    description:
+      "Villa pieds dans l'eau à l'entrée de Saint-Tropez avec accès direct à une plage privée et vues panoramiques sur le village. De plain-pied, 8 chambres en suite, cuisine professionnelle, salle de sport, hammam, piscine chauffée 16 × 8 m avec nage à contre-courant. Pool house avec barbecue. Services inclus : ménage 4h/jour, linge 2×/semaine, sécurité nocturne, gardien 24h/24, paddleboard, kayak, vélos.",
+    features: [
+      "Accès plage privée",
+      "8 chambres en suite",
+      "Piscine chauffée 16 × 8 m",
+      "Salle de sport · Hammam",
+      "Pool house & barbecue",
+      "Ménage & linge inclus",
+      "Sécurité & gardien 24h/24",
+      "Paddleboard · Kayak · Vélos",
+    ],
+    category: "vacances",
+  },
+
+  {
+    slug: "calimer",
+    name: "CALIMER",
+    location: "Gassin",
+    type: "location",
+    surface: 200,
+    rooms: 5,
+    bedrooms: 4,
+    land: 4000,
+    price: 18000,
+    priceDisplay: "À partir de 18 000 €/sem.",
+    imageUrl: p("c30fb4dc55d801fc7473840b5b161dfa", "bac858c70df016f87d1c86a67eabafcc"),
+    images: [
+      p("c30fb4dc55d801fc7473840b5b161dfa", "bac858c70df016f87d1c86a67eabafcc"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "d62c9637b99b359bc12723eee051164f"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "4b6f0ac7aa9e7c5eec7a5149729ff203"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "99101f89eb0989e30184e81d8a9a290d"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "c743fc01a3d7705d87efc4916e847fe8"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "3cdeadeb2e5bf84de6ea9c1808dc4d37"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "a94c8e818bbeb12732f32b4b0f7cca4a"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "6bd523c55bb2131278edbd07bc027f1d"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "f91dce8c8995b5be918a4b6da2e2e9df"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "e2b9d003f3468301e09c07b418c7ea2e"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "7e4d5ac80e6521b4d98dd081468a41ef"),
+      p("c30fb4dc55d801fc7473840b5b161dfa", "f970cfc877891aa57e0867dbd9565797"),
+    ],
+    description:
+      "Superbe villa à louer à Gassin, au calme et sans vis-à-vis, à proximité du village de Saint-Tropez et des plages de Pampelonne. Style provençal et contemporain harmonieusement mêlés. Piscine chauffée à l'eau salée 14 × 6 m, 4 chambres en suite avec TV LED, dressing et climatisation, salon avec cheminée, cuisine américaine équipée.",
+    features: [
+      "Piscine chauffée eau salée 14 × 6 m",
+      "4 chambres en suite",
+      "Salon avec cheminée",
+      "Cuisine américaine équipée",
+      "Sans vis-à-vis · Au calme",
+      "Exposition sud",
+      "WiFi · Climatisation",
+      "6 parkings",
+    ],
+    category: "vacances",
+  },
+
+  {
+    slug: "golf",
+    name: "GOLF",
+    location: "Gassin",
+    type: "location",
+    surface: 160,
+    rooms: 4,
+    bedrooms: 3,
+    price: 0,
+    priceDisplay: "Prix sur demande",
+    imageUrl: p("15923bc998a4d093ba1eddd741d4f0ac", "ccfb29287d79b21c0102c765dbf408af"),
+    images: [
+      p("15923bc998a4d093ba1eddd741d4f0ac", "ccfb29287d79b21c0102c765dbf408af"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "2ab08f40f5b65856b7472eea77c5b3ec"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "78c980cb7e98b67c4f1abe760250c819"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "dc6438e245a858b690793831c10c37df"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "c7a69d7e7db35761267a99cf70a7bb13"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "3f2d385a4f79db30af493498738b3eab"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "18b3805949ad3673d222d7160443d18c"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "9d507ce99e0ea1651c26f44ba3a57f73"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "178b773215804bd8910472ed5cac34a3"),
+      p("15923bc998a4d093ba1eddd741d4f0ac", "bee6cdf10f0c35d23d5b4fb4da86b678"),
+    ],
+    description:
+      "Superbe villa de 160 m² à louer sur le domaine du Golf de Gassin, à deux pas de Saint-Tropez. Cette villa F4 de plain-pied propose 3 chambres avec salle de bains, cuisine américaine équipée, double vitrage, terrasses et jardins privatifs avec exposition ouest sur les collines.",
+    features: [
+      "Sur le domaine du Golf de Gassin",
+      "3 chambres",
+      "Cuisine américaine équipée",
+      "Terrasses & jardins privatifs",
+      "Exposition ouest · Collines",
+      "3 parkings",
+      "Double vitrage",
+      "De plain-pied",
     ],
     category: "vacances",
   },
