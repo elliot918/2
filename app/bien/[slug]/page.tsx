@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getPropertyBySlug, allProperties } from '@/lib/properties'
+import HeroParallax from './HeroParallax'
 import BienContactForm from './BienContactForm'
 
 interface PageProps {
@@ -27,115 +27,128 @@ export default async function BienPage({ params }: PageProps) {
 
   if (!property) notFound()
 
-  // Specs line — only include defined values
-  const specs = [
-    `${property.surface} m²`,
-    `${property.rooms} pièces`,
-    property.bedrooms ? `${property.bedrooms} chambres` : null,
-    property.land ? `terrain ${property.land.toLocaleString('fr-FR')} m²` : null,
-  ].filter(Boolean) as string[]
+  const stats = [
+    { label: 'Surface',  value: `${property.surface} m²` },
+    { label: 'Pièces',   value: `${property.rooms}` },
+    ...(property.bedrooms
+      ? [{ label: 'Chambres', value: `${property.bedrooms}` }]
+      : []),
+    ...(property.land
+      ? [{ label: 'Terrain', value: `${property.land.toLocaleString('fr-FR')} m²` }]
+      : []),
+  ]
+
+  const serif   = 'var(--font-cormorant), Georgia, serif'
+  const sans    = 'var(--font-manrope), sans-serif'
+  const gold    = '#B9965A'
+  const dark    = '#1F1D1A'
+  const muted   = '#6F7358'
+  const divider = '1px solid #D8C3A5'
 
   return (
     <>
-      {/* ── 1. Hero photo — full width, 500 px ── */}
-      <div style={{ width: '100%', height: '500px', position: 'relative', overflow: 'hidden' }}>
-        <Image
-          src={property.imageUrl}
-          alt={property.name}
-          fill
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-          priority
-          sizes="100vw"
-        />
-      </div>
+      {/* ── 1. Hero ── */}
+      <HeroParallax
+        imageUrl={property.imageUrl}
+        name={property.name}
+        location={property.location}
+        type={property.type}
+      />
 
-      {/* ── 2. Content — ivory background ── */}
-      <div style={{ backgroundColor: '#F7F3EE', padding: '3rem 1.5rem 5rem' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+      {/* ── 2. Main content — 2-col grid ── */}
+      <section style={{ backgroundColor: '#F7F3EE', padding: '5rem 1.5rem' }}>
+        <div
+          className="grid lg:grid-cols-3"
+          style={{ maxWidth: '1320px', margin: '0 auto', gap: '4rem' }}
+        >
 
-          {/* Location eyebrow */}
-          <p style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: '0.6rem',
-            letterSpacing: '0.35em',
-            textTransform: 'uppercase',
-            color: '#B9965A',
-            marginBottom: '0.75rem',
-          }}>
-            {property.location} · {property.type === 'vente' ? 'À vendre' : 'Location saisonnière'}
-          </p>
-
-          {/* Name + Price row */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <h1 style={{
-              fontFamily: 'var(--font-cormorant), Georgia, serif',
+          {/* Left — description (2/3) */}
+          <div className="lg:col-span-2">
+            <h2 style={{
+              fontFamily: serif,
               fontStyle: 'italic',
               fontWeight: 300,
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              color: '#1F1D1A',
-              lineHeight: 1,
-              margin: 0,
+              fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+              color: dark,
+              marginBottom: '1.5rem',
             }}>
-              {property.name}
-            </h1>
+              La propriété
+            </h2>
             <p style={{
-              fontFamily: 'var(--font-cormorant), Georgia, serif',
-              fontWeight: 300,
-              fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-              color: '#B9965A',
-              margin: 0,
-              whiteSpace: 'nowrap',
+              fontFamily: sans,
+              fontSize: '0.9375rem',
+              lineHeight: 1.85,
+              color: '#4a4845',
+              maxWidth: '64ch',
             }}>
-              {property.priceDisplay}
+              {property.description}
             </p>
           </div>
 
-          {/* Divider */}
-          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '1.5rem 0' }} />
+          {/* Right — price + stats (1/3) */}
+          <div style={{ alignSelf: 'start' }}>
 
-          {/* Specs — one line */}
-          <p style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: '0.75rem',
-            letterSpacing: '0.15em',
-            color: '#6F7358',
-            textTransform: 'uppercase',
-          }}>
-            {specs.join(' · ')}
-          </p>
+            {/* Price */}
+            <p style={{
+              fontFamily: serif,
+              fontWeight: 300,
+              fontSize: 'clamp(1.75rem, 2.5vw, 2.5rem)',
+              color: gold,
+              marginBottom: '2rem',
+              lineHeight: 1.1,
+            }}>
+              {property.priceDisplay}
+            </p>
 
-          {/* Divider */}
-          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '1.5rem 0' }} />
+            {/* Stats rows */}
+            <div style={{ borderTop: divider }}>
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.75rem 0',
+                    borderBottom: divider,
+                  }}
+                >
+                  <span style={{ fontFamily: sans, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: muted }}>
+                    {s.label}
+                  </span>
+                  <span style={{ fontFamily: serif, fontSize: '1rem', fontWeight: 300, color: dark }}>
+                    {s.value}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-          {/* Description */}
-          <p style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: '0.9375rem',
-            lineHeight: 1.8,
-            color: '#3a3835',
-            maxWidth: '72ch',
-          }}>
-            {property.description}
-          </p>
+            {/* Contact info */}
+            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: divider }}>
+              <p style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: gold, marginBottom: '0.75rem' }}>
+                Contact
+              </p>
+              <a href="tel:+33494564485" style={{ fontFamily: sans, fontSize: '0.875rem', color: dark, display: 'block', marginBottom: '0.25rem' }}>
+                +33 (0)4 94 56 44 85
+              </a>
+              <a href="mailto:barrys@lesbarrys.com" style={{ fontFamily: sans, fontSize: '0.875rem', color: gold, display: 'block' }}>
+                barrys@lesbarrys.com
+              </a>
+            </div>
 
-          {/* Divider */}
-          <hr style={{ border: 'none', borderTop: '1px solid #D8C3A5', margin: '3rem 0 2rem' }} />
+          </div>
+        </div>
+      </section>
 
-          {/* Contact form */}
-          <p style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: '0.6rem',
-            letterSpacing: '0.35em',
-            textTransform: 'uppercase',
-            color: '#B9965A',
-            marginBottom: '1.75rem',
-          }}>
+      {/* ── 3. Contact form ── */}
+      <section style={{ backgroundColor: '#F7F3EE', borderTop: divider, padding: '4rem 1.5rem 6rem' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <p style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: gold, marginBottom: '2rem' }}>
             Nous contacter pour ce bien
           </p>
           <BienContactForm propertyName={property.name} />
-
         </div>
-      </div>
+      </section>
     </>
   )
 }
