@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import PriceCounter from '@/components/PriceCounter'
 
 interface PropertyCardProps {
   slug: string
@@ -22,6 +23,7 @@ export default function PropertyCard({
   location,
   surface,
   rooms,
+  price,
   priceDisplay,
   imageUrl,
 }: PropertyCardProps) {
@@ -83,13 +85,13 @@ export default function PropertyCard({
           {surface} m² · {rooms} pièces
         </p>
 
-        {/* Price */}
-        <p
+        {/* Price — counts up from 0 when card scrolls into view */}
+        <PriceCounter
+          price={price}
+          priceDisplay={priceDisplay}
           className="text-[#B9965A] text-xl mt-3"
           style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-        >
-          {priceDisplay}
-        </p>
+        />
 
         {/* Arrow link */}
         <p

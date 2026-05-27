@@ -52,21 +52,46 @@ export default async function BienPage({ params }: PageProps) {
 
   return (
     <>
-      {/* ── 1. Hero (client component for GSAP parallax) ── */}
-      <HeroParallax
-        imageUrl={property.imageUrl}
-        name={property.name}
-        location={property.location}
-        type={property.type}
-      />
+      {/* ── 1. Hero image — full screen, clean ── */}
+      <HeroParallax imageUrl={property.imageUrl} name={property.name} />
 
-      {/* ── 2. Details ── */}
-      <section className="bg-[#F7F3EE] py-20 px-6">
+      {/* ── 2. Property heading ── */}
+      <section className="bg-[#F7F3EE] pt-14 pb-0 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          <p
+            style={{
+              fontFamily: 'var(--font-manrope), sans-serif',
+              fontSize: '0.6rem',
+              letterSpacing: '0.35em',
+              textTransform: 'uppercase',
+              color: '#B9965A',
+              marginBottom: '0.75rem',
+            }}
+          >
+            {property.location} · {property.type === 'vente' ? 'À vendre' : 'Location saisonnière'}
+          </p>
+          <h1
+            style={{
+              fontFamily: 'var(--font-cormorant), Georgia, serif',
+              fontStyle: 'italic',
+              fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+              fontWeight: 300,
+              color: '#1F1D1A',
+              lineHeight: 1.05,
+            }}
+          >
+            {property.name}
+          </h1>
+        </div>
+      </section>
+
+      {/* ── 3. Details ── */}
+      <section className="bg-[#F7F3EE] py-16 px-6">
         <div className="max-w-[1440px] mx-auto grid lg:grid-cols-3 gap-16">
           {/* Left — 2/3 */}
           <div className="lg:col-span-2">
             <h2
-              className="text-3xl md:text-4xl font-light italic text-[#1F1D1A] mb-8"
+              className="text-xl font-light italic text-[#6F7358] mb-8"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               La propriété
