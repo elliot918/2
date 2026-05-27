@@ -10,6 +10,7 @@ import {
 } from '@/lib/properties'
 import PropertyCard from '@/components/PropertyCard'
 import HeroParallax from './HeroParallax'
+import PriceCounter from '@/components/PriceCounter'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -113,13 +114,13 @@ export default async function BienPage({ params }: PageProps) {
 
           {/* Right sidebar — 1/3 */}
           <div className="lg:sticky lg:top-8 self-start">
-            {/* Price */}
-            <p
+            {/* Price — counts up from 0 when scrolled into view */}
+            <PriceCounter
+              price={property.price}
+              priceDisplay={property.priceDisplay}
               className="text-3xl md:text-4xl font-light text-[#B9965A] mb-8"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              {property.priceDisplay}
-            </p>
+            />
 
             {/* Key stats */}
             <div className="border-t border-[#D8C3A5]">
