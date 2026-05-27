@@ -1,29 +1,36 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 import StickyPhone from "@/components/StickyPhone";
 import LenisProvider from "@/components/LenisProvider";
+import PropertyBackdrop from "@/components/PropertyBackdrop";
+import PageTransition from "@/components/PageTransition";
 
-const inter = Inter({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
 });
 
-const playfair = Playfair_Display({
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
   title: {
-    template: "TRANS'HORSES | %s",
-    default: "TRANS'HORSES",
+    template: "Les Barrys | %s",
+    default: "Les Barrys",
   },
   description:
-    "Transport de chevaux professionnels en France et à l'étranger. Liaisons hebdomadaires, groupage, location PL et VL avec ou sans chauffeur.",
+    "Agence immobilière de prestige dans le Golfe de Saint-Tropez depuis plus de 20 ans. Villas de luxe à vendre et en location saisonnière à Gassin, Ramatuelle, Saint-Tropez.",
 };
 
 export default function RootLayout({
@@ -32,11 +39,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${playfair.variable} h-full`}>
-      <body className={`${inter.className} min-h-full flex flex-col`}>
+    <html lang="fr">
+      <body
+        className={`${cormorant.variable} ${manrope.variable} bg-[#F7F3EE] text-[#1F1D1A]`}
+      >
         <LenisProvider>
+          <CustomCursor />
+          <PropertyBackdrop />
           <Nav />
-          <main className="flex-1">{children}</main>
+          <PageTransition>
+            {children}
+          </PageTransition>
           <Footer />
           <StickyPhone />
         </LenisProvider>

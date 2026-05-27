@@ -1,79 +1,79 @@
-import Link from 'next/link';
-import { MapPin, Phone, Mail, Globe, Share2, Send } from 'lucide-react';
+import Link from 'next/link'
 
 const navLinks = [
   { label: 'Accueil', href: '/' },
-  { label: 'Transport Chevaux', href: '/transport-chevaux' },
-  { label: 'Aérien & Maritime', href: '/aerien-maritime' },
-  { label: 'Location PL', href: '/location-poids-lourds' },
-  { label: 'Location VL', href: '/location-vehicules-legers' },
-  { label: 'Services & Devis', href: '/services-devis' },
+  { label: 'Vente', href: '/vente' },
+  { label: 'Locations saisonnières', href: '/locations-saisonnieres' },
+  { label: 'Notre agence', href: '/notre-agence' },
+  { label: 'Équipe', href: '/equipe' },
+  { label: 'Estimation', href: '/estimation' },
   { label: 'Contact', href: '/contact' },
-];
+]
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}>
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer style={{ backgroundColor: '#1F1D1A', color: '#F7F3EE' }}>
+      <div className="container-barrys py-20">
 
-          {/* Column 1: Logo + description + social */}
-          <div className="flex flex-col gap-5">
-            <div>
-              <h2
-                className="text-2xl font-bold leading-tight"
-                style={{
-                  fontFamily: 'var(--font-playfair), Georgia, serif',
-                  color: 'var(--color-gold)',
-                }}
-              >
-                TRANS&#39;HORSES
-              </h2>
-              <p
-                className="text-xs tracking-widest uppercase mt-0.5"
-                style={{ color: 'rgba(255,255,255,0.55)' }}
-              >
-                Transport Équestre
-              </p>
-            </div>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              Spécialiste du transport équestre en France et à l&#39;international.
-              Liaisons hebdomadaires, groupage et affrètement pour vos chevaux en
-              toute sécurité.
-            </p>
-            {/* Social placeholders */}
-            <div className="flex items-center gap-3 mt-1">
-              {[
-                { Icon: Globe, label: 'Site web' },
-                { Icon: Share2, label: 'Partager' },
-                { Icon: Send, label: 'Contact' },
-              ].map(({ Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 bg-white/10 text-white/75 hover:bg-[#c8a84b] hover:text-white"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
-          </div>
+        {/* Top: Logo + tagline */}
+        <div className="mb-14 border-b" style={{ borderColor: 'rgba(216, 195, 165, 0.15)', paddingBottom: '2.5rem' }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-cormorant), Georgia, serif',
+              fontStyle: 'italic',
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              letterSpacing: '0.1em',
+              lineHeight: 1,
+              color: '#F7F3EE',
+            }}
+          >
+            Les Barrys
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-manrope), sans-serif',
+              fontSize: '0.75rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: '#D8C3A5',
+              marginTop: '0.75rem',
+            }}
+          >
+            Agence immobilière de prestige · Golfe de Saint-Tropez
+          </p>
+        </div>
 
-          {/* Column 2: Liens rapides */}
+        {/* 3 columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-16">
+
+          {/* Column 1: Navigation */}
           <div>
             <h3
-              className="text-sm font-semibold uppercase tracking-widest mb-5"
-              style={{ color: 'var(--color-gold)' }}
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.65rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                color: '#B9965A',
+                marginBottom: '1.25rem',
+              }}
             >
-              Liens rapides
+              Navigation
             </h3>
-            <ul className="flex flex-col gap-2.5">
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
+                    style={{
+                      fontFamily: 'var(--font-manrope), sans-serif',
+                      fontSize: '0.8125rem',
+                      color: '#D8C3A5',
+                      transition: 'color 0.3s ease',
+                      textDecoration: 'none',
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
                   >
                     {link.label}
                   </Link>
@@ -82,151 +82,186 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Coordonnées */}
+          {/* Column 2: Nos agences */}
           <div>
             <h3
-              className="text-sm font-semibold uppercase tracking-widest mb-5"
-              style={{ color: 'var(--color-gold)' }}
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.65rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                color: '#B9965A',
+                marginBottom: '1.25rem',
+              }}
             >
-              Coordonnées
+              Nos agences
             </h3>
-            <ul className="flex flex-col gap-4">
-              <li className="flex gap-3">
-                <MapPin
-                  size={16}
-                  className="shrink-0 mt-0.5"
-                  style={{ color: 'var(--color-gold)' }}
-                />
-                <address
-                  className="not-italic text-sm leading-relaxed"
-                  style={{ color: 'rgba(255,255,255,0.75)' }}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <address
+                style={{
+                  fontStyle: 'normal',
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '0.8125rem',
+                  color: '#D8C3A5',
+                  lineHeight: 1.7,
+                }}
+              >
+                <span
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontSize: '1rem',
+                    fontStyle: 'italic',
+                    color: '#F7F3EE',
+                    marginBottom: '0.25rem',
+                    letterSpacing: '0.05em',
+                  }}
                 >
-                  Le Dentu, Route de Boinvilliers
-                  <br />
-                  78111 Dammartin-en-Serve
-                </address>
-              </li>
-              <li className="flex gap-3">
-                <MapPin
-                  size={16}
-                  className="shrink-0 mt-0.5"
-                  style={{ color: 'var(--color-gold)' }}
-                />
-                <address
-                  className="not-italic text-sm leading-relaxed"
-                  style={{ color: 'rgba(255,255,255,0.75)' }}
+                  Gassin
+                </span>
+                11 place Neuve<br />
+                83580 Gassin
+              </address>
+
+              <address
+                style={{
+                  fontStyle: 'normal',
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '0.8125rem',
+                  color: '#D8C3A5',
+                  lineHeight: 1.7,
+                }}
+              >
+                <span
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontSize: '1rem',
+                    fontStyle: 'italic',
+                    color: '#F7F3EE',
+                    marginBottom: '0.25rem',
+                    letterSpacing: '0.05em',
+                  }}
                 >
-                  Chemin du Péage
-                  <br />
-                  84100 Orange
-                </address>
-              </li>
-              <li className="flex gap-3">
-                <Phone
-                  size={16}
-                  className="shrink-0 mt-0.5"
-                  style={{ color: 'var(--color-gold)' }}
-                />
-                <div className="flex flex-col gap-1">
-                  <a
-                    href="tel:+33608233369"
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: 'rgba(255,255,255,0.75)' }}
-                  >
-                    06.08.23.33.69
-                  </a>
-                  <a
-                    href="tel:+33134763033"
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: 'rgba(255,255,255,0.75)' }}
-                  >
-                    01.34.76.30.33
-                  </a>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <Mail
-                  size={16}
-                  className="shrink-0 mt-0.5"
-                  style={{ color: 'var(--color-gold)' }}
-                />
-                <a
-                  href="mailto:mail@transhorses.com"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'rgba(255,255,255,0.75)' }}
-                >
-                  mail@transhorses.com
-                </a>
-              </li>
-            </ul>
+                  Ramatuelle
+                </span>
+                Tahïti Beach<br />
+                Route de Tahïti<br />
+                83350 Ramatuelle
+              </address>
+            </div>
           </div>
 
-          {/* Column 4: Légal */}
+          {/* Column 3: Contact */}
           <div>
             <h3
-              className="text-sm font-semibold uppercase tracking-widest mb-5"
-              style={{ color: 'var(--color-gold)' }}
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.65rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                color: '#B9965A',
+                marginBottom: '1.25rem',
+              }}
             >
-              Informations légales
+              Contact
             </h3>
-            <ul className="flex flex-col gap-2.5">
-              <li>
-                <Link
-                  href="/mentions-legales"
-                  className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
-                >
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/politique-confidentialite"
-                  className="text-sm transition-colors duration-200 text-white/75 hover:text-[#c8a84b]"
-                >
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li className="pt-2">
-                <p
-                  className="text-xs"
-                  style={{ color: 'rgba(255,255,255,0.5)' }}
-                >
-                  SIREN : 448 516 617
-                </p>
-              </li>
-              <li>
-                <p
-                  className="text-xs"
-                  style={{ color: 'rgba(255,255,255,0.5)' }}
-                >
-                  Tous droits réservés
-                </p>
-              </li>
-            </ul>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+              <a
+                href="tel:+33494564485"
+                style={{
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '0.8125rem',
+                  color: '#D8C3A5',
+                  transition: 'color 0.3s ease',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
+              >
+                +33 (0)4 94 56 44 85
+              </a>
+              <a
+                href="mailto:barrys@lesbarrys.com"
+                style={{
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '0.8125rem',
+                  color: '#D8C3A5',
+                  transition: 'color 0.3s ease',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#D8C3A5' }}
+              >
+                barrys@lesbarrys.com
+              </a>
+              <p
+                style={{
+                  fontFamily: 'var(--font-cormorant), Georgia, serif',
+                  fontSize: '0.9375rem',
+                  fontStyle: 'italic',
+                  color: 'rgba(247, 243, 238, 0.5)',
+                  marginTop: '0.5rem',
+                  letterSpacing: '0.03em',
+                }}
+              >
+                Présents depuis plus de 20 ans
+              </p>
+            </div>
           </div>
+
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div
-        className="border-t"
-        style={{ borderColor: 'rgba(255,255,255,0.12)' }}
-      >
-        <div className="container-custom py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div style={{ borderTop: '1px solid rgba(216, 195, 165, 0.15)' }}>
+        <div
+          className="container-barrys py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
           <p
-            className="text-xs"
-            style={{ color: 'rgba(255,255,255,0.45)' }}
+            style={{
+              fontFamily: 'var(--font-manrope), sans-serif',
+              fontSize: '0.6875rem',
+              color: 'rgba(247, 243, 238, 0.4)',
+              letterSpacing: '0.05em',
+            }}
           >
-            &copy; 2024 TRANS&#39;HORSES SAS. Tous droits réservés.
+            &copy; 2024 Les Barrys — Tous droits réservés
           </p>
-          <p
-            className="text-xs"
-            style={{ color: 'rgba(255,255,255,0.35)' }}
-          >
-            Transport équestre professionnel depuis 2003
-          </p>
+          <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <a
+              href="/mentions-legales"
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.6875rem',
+                color: 'rgba(216, 195, 165, 0.6)',
+                letterSpacing: '0.05em',
+                transition: 'color 0.3s ease',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(216, 195, 165, 0.6)' }}
+            >
+              Mentions légales
+            </a>
+            <a
+              href="/politique-de-confidentialite"
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.6875rem',
+                color: 'rgba(216, 195, 165, 0.6)',
+                letterSpacing: '0.05em',
+                transition: 'color 0.3s ease',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#B9965A' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(216, 195, 165, 0.6)' }}
+            >
+              Politique de confidentialité
+            </a>
+          </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

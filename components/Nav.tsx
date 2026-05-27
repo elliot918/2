@@ -1,156 +1,294 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
 const navLinks = [
   { label: 'Accueil', href: '/' },
-  { label: 'Transport Chevaux', href: '/transport-chevaux' },
-  { label: 'Aérien & Maritime', href: '/aerien-maritime' },
-  { label: 'Location PL', href: '/location-poids-lourds' },
-  { label: 'Location VL', href: '/location-vehicules-legers' },
-  { label: 'Services & Devis', href: '/services-devis' },
+  { label: 'Vente', href: '/vente' },
+  { label: 'Locations', href: '/locations-saisonnieres' },
+  { label: 'Notre agence', href: '/notre-agence' },
+  { label: 'Équipe', href: '/equipe' },
   { label: 'Contact', href: '/contact' },
-];
+]
 
 export default function Nav() {
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    setMobileOpen(false)
+  }, [pathname])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href);
-  };
+    if (href === '/') return pathname === '/'
+    return pathname.startsWith(href)
+  }
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white shadow-md'
-          : 'bg-white/95 backdrop-blur-sm'
-      }`}
-    >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex flex-col leading-tight group">
-            <span
-              className="text-xl md:text-2xl font-bold tracking-tight transition-colors duration-200"
-              style={{
-                fontFamily: 'var(--font-playfair), Georgia, serif',
-                color: 'var(--color-primary)',
-              }}
-            >
-              TRANS&#39;HORSES
-            </span>
-            <span
-              className="text-xs tracking-widest uppercase"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              Transport Équestre
-            </span>
-          </Link>
+    <>
+      <header
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          transition: 'background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease',
+          backgroundColor: scrolled ? 'rgba(247, 243, 238, 0.95)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(4px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(216, 195, 165, 0.3)' : '1px solid transparent',
+          color: scrolled ? '#1F1D1A' : '#ffffff',
+        }}
+      >
+        <div className="container-barrys">
+          <div className="flex items-center justify-between h-20 lg:h-24">
 
-          {/* Desktop navigation */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Navigation principale">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-3 py-2 text-sm font-medium rounded transition-colors duration-200 ${
-                  isActive(link.href)
-                    ? 'font-semibold'
-                    : 'hover:opacity-80'
-                }`}
+            {/* Logo */}
+            <Link href="/" className="flex flex-col leading-tight group">
+              <span
                 style={{
-                  color: isActive(link.href)
-                    ? 'var(--color-gold)'
-                    : 'var(--color-text)',
+                  fontFamily: 'var(--font-cormorant), Georgia, serif',
+                  fontStyle: 'italic',
+                  letterSpacing: '0.15em',
+                  fontSize: '1.25rem',
+                  lineHeight: 1.1,
                 }}
               >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
-            <Link href="/services-devis" className="btn-primary text-sm">
-              Demander un devis
+                LES BARRYS
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '10px',
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                  opacity: 0.7,
+                  lineHeight: 1.4,
+                }}
+              >
+                GASSIN · SAINT-TROPEZ
+              </span>
             </Link>
+
+            {/* Desktop navigation */}
+            <nav
+              className="hidden lg:flex items-center"
+              style={{ gap: '2rem' }}
+              aria-label="Navigation principale"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    fontFamily: 'var(--font-manrope), sans-serif',
+                    fontSize: '0.75rem',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color: isActive(link.href) ? '#B9965A' : 'currentColor',
+                    transition: 'color 0.3s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive(link.href)) {
+                      (e.currentTarget as HTMLElement).style.color = '#B9965A'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive(link.href)) {
+                      (e.currentTarget as HTMLElement).style.color = 'currentColor'
+                    }
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Desktop CTA: Estimation */}
+            <div className="hidden lg:block">
+              <Link
+                href="/estimation"
+                style={{
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  border: '1px solid currentColor',
+                  padding: '0.5rem 1.25rem',
+                  transition: 'background-color 0.3s ease, color 0.3s ease',
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.backgroundColor = '#1F1D1A'
+                  el.style.color = '#F7F3EE'
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.backgroundColor = 'transparent'
+                  el.style.color = 'currentColor'
+                }}
+              >
+                Estimation
+              </Link>
+            </div>
+
+            {/* Mobile hamburger */}
+            <button
+              className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-0"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              style={{ color: 'currentColor' }}
+            >
+              {/* 3 lines → X via CSS transition */}
+              <span
+                style={{
+                  display: 'block',
+                  width: '24px',
+                  height: '1.5px',
+                  backgroundColor: 'currentColor',
+                  transition: 'transform 0.35s ease, opacity 0.35s ease',
+                  transform: mobileOpen ? 'translateY(5px) rotate(45deg)' : 'none',
+                }}
+              />
+              <span
+                style={{
+                  display: 'block',
+                  width: '24px',
+                  height: '1.5px',
+                  backgroundColor: 'currentColor',
+                  margin: '4px 0',
+                  transition: 'opacity 0.35s ease',
+                  opacity: mobileOpen ? 0 : 1,
+                }}
+              />
+              <span
+                style={{
+                  display: 'block',
+                  width: '24px',
+                  height: '1.5px',
+                  backgroundColor: 'currentColor',
+                  transition: 'transform 0.35s ease, opacity 0.35s ease',
+                  transform: mobileOpen ? 'translateY(-5px) rotate(-45deg)' : 'none',
+                }}
+              />
+            </button>
+
           </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200"
-            style={{ color: 'var(--color-primary)' }}
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile full-screen drawer */}
       <div
         id="mobile-menu"
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        }`}
-        style={{ backgroundColor: 'white', borderTop: '1px solid var(--color-border)' }}
+        className="lg:hidden fixed inset-0 z-40 flex flex-col"
+        style={{
+          backgroundColor: '#1F1D1A',
+          color: '#ffffff',
+          transition: 'opacity 0.4s ease, visibility 0.4s ease',
+          opacity: mobileOpen ? 1 : 0,
+          visibility: mobileOpen ? 'visible' : 'hidden',
+          pointerEvents: mobileOpen ? 'auto' : 'none',
+        }}
+        aria-hidden={!mobileOpen}
       >
+        {/* Logo centered */}
+        <div className="flex flex-col items-center justify-center pt-24 pb-10">
+          <Link
+            href="/"
+            className="flex flex-col items-center leading-tight"
+            onClick={() => setMobileOpen(false)}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-cormorant), Georgia, serif',
+                fontStyle: 'italic',
+                letterSpacing: '0.15em',
+                fontSize: '1.5rem',
+                color: '#ffffff',
+                lineHeight: 1.1,
+              }}
+            >
+              LES BARRYS
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '9px',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.5)',
+                marginTop: '4px',
+              }}
+            >
+              GASSIN · SAINT-TROPEZ
+            </span>
+          </Link>
+        </div>
+
+        {/* Nav links stacked */}
         <nav
-          className="container-custom py-4 flex flex-col gap-1"
+          className="flex flex-col items-center"
+          style={{ gap: '0.25rem' }}
           aria-label="Navigation mobile"
         >
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
-                isActive(link.href) ? 'font-semibold' : ''
-              }`}
               style={{
-                color: isActive(link.href)
-                  ? 'var(--color-gold)'
-                  : 'var(--color-text)',
-                backgroundColor: isActive(link.href)
-                  ? 'rgba(200, 168, 75, 0.08)'
-                  : 'transparent',
+                fontFamily: 'var(--font-cormorant), Georgia, serif',
+                fontSize: '2rem',
+                fontStyle: 'italic',
+                color: isActive(link.href) ? '#B9965A' : '#ffffff',
+                letterSpacing: '0.05em',
+                padding: '0.5rem 2rem',
+                transition: 'color 0.3s ease',
+                textAlign: 'center',
               }}
+              onClick={() => setMobileOpen(false)}
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 pb-1">
-            <Link
-              href="/services-devis"
-              className="btn-primary w-full justify-center"
-            >
-              Demander un devis
-            </Link>
-          </div>
+
+          {/* CTA in mobile */}
+          <Link
+            href="/estimation"
+            style={{
+              fontFamily: 'var(--font-manrope), sans-serif',
+              fontSize: '0.75rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              border: '1px solid rgba(216, 195, 165, 0.6)',
+              padding: '0.75rem 2.5rem',
+              color: '#D8C3A5',
+              marginTop: '2rem',
+              transition: 'background-color 0.3s ease, color 0.3s ease',
+            }}
+            onClick={() => setMobileOpen(false)}
+          >
+            Estimation
+          </Link>
         </nav>
       </div>
-    </header>
-  );
+    </>
+  )
 }

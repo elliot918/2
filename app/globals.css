@@ -1,48 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  /* Colors */
-  --color-primary: #1b3a2d;
-  --color-gold: #c8a84b;
-  --color-bg: #f7f4ef;
-  --color-dark: #1b2028;
-  --color-text: #1a1a1a;
-  --color-muted: #6b7280;
-  --color-border: #e2ddd5;
-
-  /* Spacing */
-  --spacing-section: 5rem;
-  --spacing-section-sm: 3rem;
-
-  /* Fonts */
-  --font-playfair: "Playfair Display", Georgia, serif;
-  --font-inter: "Inter", system-ui, sans-serif;
+  --ivoire: #F7F3EE;
+  --charcoal: #1F1D1A;
+  --sable: #D8C3A5;
+  --or: #B9965A;
+  --olive: #6F7358;
+  /* Set by layout via next/font */
+  --font-cormorant: "";
+  --font-manrope: "";
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-bg);
   }
 
   body {
-    font-family: var(--font-inter);
-    color: var(--color-text);
-    background-color: var(--color-bg);
+    background: var(--ivoire);
+    color: var(--charcoal);
+    font-family: var(--font-manrope), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-playfair);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-dark);
+  * {
+    cursor: none;
   }
 
   a {
@@ -58,109 +41,74 @@
 }
 
 @layer components {
+  .heading {
+    font-family: var(--font-cormorant), Georgia, serif;
+  }
+
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: var(--color-primary);
-    color: #ffffff;
-    font-family: var(--font-inter);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    border-radius: 4px;
-    border: 2px solid var(--color-primary);
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease,
-      color 0.2s ease, transform 0.15s ease;
-    text-decoration: none;
+    background-color: var(--charcoal);
+    color: var(--ivoire);
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   .btn-primary:hover {
-    background-color: var(--color-gold);
-    border-color: var(--color-gold);
-    color: #ffffff;
-    transform: translateY(-1px);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
+    background-color: var(--or);
   }
 
   .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: transparent;
-    color: var(--color-primary);
-    font-family: var(--font-inter);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    border-radius: 4px;
-    border: 2px solid var(--color-primary);
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease,
-      transform 0.15s ease;
-    text-decoration: none;
+    border: 1px solid currentColor;
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   .btn-outline:hover {
-    background-color: var(--color-primary);
-    color: #ffffff;
-    transform: translateY(-1px);
+    background-color: var(--charcoal);
+    color: var(--ivoire);
   }
 
-  .btn-outline:active {
-    transform: translateY(0);
-  }
-
-  .section-padding {
-    padding-top: var(--spacing-section);
-    padding-bottom: var(--spacing-section);
-  }
-
-  @media (max-width: 768px) {
-    .section-padding {
-      padding-top: var(--spacing-section-sm);
-      padding-bottom: var(--spacing-section-sm);
-    }
-  }
-
-  .container-custom {
-    max-width: 80rem; /* 1280px = 7xl */
+  .container-barrys {
+    max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
-  @media (min-width: 640px) {
-    .container-custom {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+  @media (min-width: 768px) {
+    .container-barrys {
+      padding-left: 3rem;
+      padding-right: 3rem;
     }
   }
 
   @media (min-width: 1024px) {
-    .container-custom {
-      padding-left: 2rem;
-      padding-right: 2rem;
+    .container-barrys {
+      padding-left: 5rem;
+      padding-right: 5rem;
     }
   }
 
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary) 0%,
-      var(--color-gold) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .price-tag {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--or);
+    letter-spacing: 0.05em;
   }
 }
