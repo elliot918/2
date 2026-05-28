@@ -98,19 +98,19 @@ export default function HomePage() {
       </section>
 
       {/* ── 3. Vente ── */}
-      <section className="bg-[#1F1D1A] py-24 px-6 relative">
+      <section className="bg-[#F7F3EE] py-24 px-6 relative">
         <div className="relative z-10 max-w-[1440px] mx-auto">
           {/* Section header */}
           <div className="flex items-end justify-between mb-12">
             <h2
-              className="text-5xl font-light italic text-white"
+              className="text-5xl font-light italic text-[#1F1D1A]"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               Biens à la Vente
             </h2>
             <Link
               href="/vente"
-              className="text-xs tracking-widest uppercase text-[#B9965A] hover:text-[#D8C3A5] transition-colors"
+              className="text-xs tracking-widest uppercase text-[#B9965A] hover:text-[#1F1D1A] transition-colors"
               style={{ fontFamily: 'var(--font-manrope), sans-serif' }}
             >
               Voir tous →
@@ -128,7 +128,7 @@ export default function HomePage() {
           <div className="mt-14 text-center">
             <Link
               href="/vente"
-              className="btn-outline text-white border-white hover:bg-white hover:text-[#1F1D1A]"
+              className="btn-outline text-[#1F1D1A] border-[#1F1D1A] hover:bg-[#1F1D1A] hover:text-white"
             >
               Voir toutes nos propriétés
             </Link>

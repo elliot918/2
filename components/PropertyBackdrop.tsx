@@ -23,7 +23,7 @@ export default function PropertyBackdrop() {
       gsap.killTweensOf(ref.current)
       if (e.detail.active) {
         setImageUrl(e.detail.imageUrl)
-        gsap.to(ref.current, { opacity: 1, duration: 0.5, ease: 'power2.out' })
+        gsap.to(ref.current, { opacity: 0.3, duration: 0.5, ease: 'power2.out' })
       } else {
         gsap.to(ref.current, { opacity: 0, duration: 0.4, ease: 'power2.in' })
       }
@@ -49,7 +49,6 @@ export default function PropertyBackdrop() {
           sizes="100vw"
         />
       )}
-      <div className="absolute inset-0 bg-[#1F1D1A]/60" />
     </div>
   )
 }
