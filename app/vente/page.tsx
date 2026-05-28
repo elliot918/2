@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Metadata } from 'next'
 import PropertyCard from '@/components/PropertyCard'
-import PropertyBackdrop from '@/components/PropertyBackdrop'
 import { venteProperties } from '@/lib/properties'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -81,8 +80,6 @@ export default function VentePage() {
 
       {/* ── Grid section ── */}
       <section className="bg-[#F7F3EE] py-16 relative">
-        <PropertyBackdrop />
-
         <div className="container-barrys relative z-10">
           {/* Filter bar */}
           <div

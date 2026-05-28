@@ -1,15 +1,26 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import gsap from 'gsap'
 
 export default function PropertyBackdrop() {
   const ref = useRef<HTMLDivElement>(null)
   const [imageUrl, setImageUrl] = useState('')
+  const pathname = usePathname()
+
+  // Reset when navigating away (e.g. clicking a card before mouseleave fires)
+  useEffect(() => {
+    if (!ref.current) return
+    gsap.killTweensOf(ref.current)
+    gsap.set(ref.current, { opacity: 0 })
+  }, [pathname])
 
   useEffect(() => {
     const handleHover = (e: CustomEvent) => {
+      if (!ref.current) return
+      gsap.killTweensOf(ref.current)
       if (e.detail.active) {
         setImageUrl(e.detail.imageUrl)
         gsap.to(ref.current, { opacity: 1, duration: 0.5, ease: 'power2.out' })
@@ -38,7 +49,6 @@ export default function PropertyBackdrop() {
           sizes="100vw"
         />
       )}
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-[#1F1D1A]/60" />
     </div>
   )

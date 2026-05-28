@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import HeroVideo from '@/components/HeroVideo'
 import PropertyCard from '@/components/PropertyCard'
-import PropertyBackdrop from '@/components/PropertyBackdrop'
 import CountUp from '@/components/CountUp'
 import { venteProperties, locationProperties } from '@/lib/properties'
 
@@ -100,7 +99,6 @@ export default function HomePage() {
 
       {/* ── 3. Vente ── */}
       <section className="bg-[#1F1D1A] py-24 px-6 relative">
-        <PropertyBackdrop />
         <div className="relative z-10 max-w-[1440px] mx-auto">
           {/* Section header */}
           <div className="flex items-end justify-between mb-12">

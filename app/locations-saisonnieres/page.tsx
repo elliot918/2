@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import PropertyCard from '@/components/PropertyCard'
-import PropertyBackdrop from '@/components/PropertyBackdrop'
 import { locationProperties } from '@/lib/properties'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -119,8 +118,6 @@ export default function LocationsSaisonnieresPage() {
 
       {/* ── Properties grid ── */}
       <section className="bg-[#F7F3EE] py-16 relative">
-        <PropertyBackdrop />
-
         <div className="container-barrys relative z-10" ref={gridRef}>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {locationProperties.map((p, i) => (
