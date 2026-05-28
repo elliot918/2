@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPropertyBySlug, allProperties } from '@/lib/properties'
 import HeroParallax from './HeroParallax'
+import PhotoGallery from './PhotoGallery'
 import BienContactForm from './BienContactForm'
 
 interface PageProps {
@@ -140,7 +141,10 @@ export default async function BienPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ── 3. Contact form ── */}
+      {/* ── 3. Photo gallery ── */}
+      <PhotoGallery images={property.images} name={property.name} />
+
+      {/* ── 4. Contact form ── */}
       <section style={{ backgroundColor: '#F7F3EE', borderTop: divider, padding: '4rem 1.5rem 6rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <p style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: gold, marginBottom: '2rem' }}>
