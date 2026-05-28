@@ -79,7 +79,7 @@ export default function VentePage() {
       </header>
 
       {/* ── Grid section ── */}
-      <section className="bg-[#F7F3EE] py-16 relative">
+      <section className="py-16 relative">
         <div className="container-barrys relative z-10">
           {/* Filter bar */}
           <div

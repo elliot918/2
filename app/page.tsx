@@ -98,7 +98,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 3. Vente ── */}
-      <section className="bg-[#F7F3EE] py-24 px-6 relative">
+      <section className="py-24 px-6 relative">
         <div className="relative z-10 max-w-[1440px] mx-auto">
           {/* Section header */}
           <div className="flex items-end justify-between mb-12">
@@ -137,7 +137,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 4. Location saisonnière ── */}
-      <section className="bg-[#F7F3EE] py-24 px-6">
+      <section className="py-24 px-6">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex items-end justify-between mb-12">
             <h2

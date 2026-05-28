@@ -36,7 +36,7 @@ export default function PropertyBackdrop() {
   return (
     <div
       ref={ref}
-      className="fixed inset-0 z-0 opacity-0 pointer-events-none"
+      className="fixed inset-0 -z-10 opacity-0 pointer-events-none"
       style={{ isolation: 'isolate' }}
     >
       {imageUrl && (

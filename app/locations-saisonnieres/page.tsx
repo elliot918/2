@@ -117,7 +117,7 @@ export default function LocationsSaisonnieresPage() {
       </div>
 
       {/* ── Properties grid ── */}
-      <section className="bg-[#F7F3EE] py-16 relative">
+      <section className="py-16 relative">
         <div className="container-barrys relative z-10" ref={gridRef}>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {locationProperties.map((p, i) => (
