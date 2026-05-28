@@ -15,6 +15,7 @@ export default function PropertyBackdrop() {
     if (!ref.current) return
     gsap.killTweensOf(ref.current)
     gsap.set(ref.current, { opacity: 0 })
+    setImageUrl('')
   }, [pathname])
 
   useEffect(() => {

@@ -10,11 +10,12 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const pathname = usePathname()
 
   useEffect(() => {
-    // Fade in content on route change
+    // Slide in from below — no opacity so page content never becomes transparent
+    // (opacity: 0 on contentRef would let z-index: -10 backdrop bleed through)
     gsap.fromTo(
       contentRef.current,
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', clearProps: 'all' }
+      { y: 10 },
+      { y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'all' }
     )
   }, [pathname])
 
