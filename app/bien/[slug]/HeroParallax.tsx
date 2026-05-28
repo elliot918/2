@@ -10,7 +10,7 @@ interface Props {
 /** Static full-screen hero — image + overlay + centred title. No GSAP. */
 export default function HeroParallax({ imageUrl, name, location, type }: Props) {
   return (
-    <section style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', height: '70vh', minHeight: '480px', overflow: 'hidden' }}>
       {/* Background photo */}
       <Image
         src={imageUrl}
